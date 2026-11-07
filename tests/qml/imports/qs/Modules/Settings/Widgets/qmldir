@@ -1,0 +1,2 @@
+module qs.Modules.Settings.Widgets
+singleton SettingsMetrics 1.0 SettingsMetrics.qml

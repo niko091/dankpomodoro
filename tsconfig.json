@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "none",
+    "strict": true,
+    "outFile": "Pomodoro.js",
+    "lib": ["ES2017"],
+    "noEmitOnError": true,
+    "removeComments": false
+  },
+  "include": ["src/**/*.ts"]
+}

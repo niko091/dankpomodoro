@@ -1,0 +1,5 @@
+module qs.Services
+singleton PluginService 1.0 PluginService.qml
+singleton SessionData 1.0 SessionData.qml
+singleton SettingsData 1.0 SettingsData.qml
+singleton AudioService 1.0 AudioService.qml

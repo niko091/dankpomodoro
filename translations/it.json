@@ -1,0 +1,368 @@
+{
+  "Show Stopwatch": {
+    "Show Stopwatch": "Mostra cronometro"
+  },
+  "Show Stopwatch in the timer menu": {
+    "Show Stopwatch in the timer menu": "Mostra il cronometro nel menu dei timer"
+  },
+  "Stopwatch": {
+    "Stopwatch": "Cronometro"
+  },
+  "Record or reset the session before switching modes.": {
+    "Record or reset the session before switching modes.": "Registra o azzera la sessione prima di cambiare modalità."
+  },
+  "Session reset": {
+    "Session reset": "Sessione azzerata"
+  },
+  "No work session to record": {
+    "No work session to record": "Nessuna sessione di lavoro da registrare"
+  },
+  "Session shorter than one minute: 0 min saved": {
+    "Session shorter than one minute: 0 min saved": "Sessione inferiore a un minuto: 0 min salvati"
+  },
+  "Pomodoro complete": {
+    "Pomodoro complete": "Pomodoro completato"
+  },
+  "Break complete": {
+    "Break complete": "Pausa terminata"
+  },
+  "Time for a short break.": {
+    "Time for a short break.": "È il momento di una pausa breve."
+  },
+  "Ready for another session?": {
+    "Ready for another session?": "Pronto per una nuova sessione?"
+  },
+  "Pomodoro Dashboard": {
+    "Pomodoro Dashboard": "Dashboard Pomodoro"
+  },
+  "Choose Pomodoro timer": {
+    "Choose Pomodoro timer": "Scegli timer Pomodoro"
+  },
+  "Pomodoro timers · work / break (min)": {
+    "Pomodoro timers · work / break (min)": "Timer Pomodoro · lavoro / pausa (min)"
+  },
+  "Edit or add timers in the plugin settings.": {
+    "Edit or add timers in the plugin settings.": "Modifica o aggiungi timer nelle impostazioni del plugin."
+  },
+  "Work": {
+    "Work": "Lavoro"
+  },
+  "Short break": {
+    "Short break": "Pausa breve"
+  },
+  "Pause": {
+    "Pause": "Pausa"
+  },
+  "Start": {
+    "Start": "Avvia"
+  },
+  "Record session": {
+    "Record session": "Registra sessione"
+  },
+  "Reset": {
+    "Reset": "Reset"
+  },
+  "Timer": {
+    "Timer": "Timer"
+  },
+  "Dashboard": {
+    "Dashboard": "Dashboard"
+  },
+  "Last 7 days": {
+    "Last 7 days": "Ultimi 7 giorni"
+  },
+  "Total work": {
+    "Total work": "Lavoro totale"
+  },
+  "Recorded work sessions only": {
+    "Recorded work sessions only": "Solo sessioni di lavoro registrate"
+  },
+  "Days": {
+    "Days": "Giorni"
+  },
+  "Months": {
+    "Months": "Mesi"
+  },
+  "Years": {
+    "Years": "Anni"
+  },
+  "Previous": {
+    "Previous": "Precedenti"
+  },
+  "Next": {
+    "Next": "Successivi"
+  },
+  "Record at least one minute of work to get started.": {
+    "Record at least one minute of work to get started.": "Registra almeno un minuto di lavoro per iniziare."
+  },
+  "Pomodoro++ Settings": {
+    "Pomodoro++ Settings": "Impostazioni Pomodoro++"
+  },
+  "Configure timer durations and behavior": {
+    "Configure timer durations and behavior": "Configura durata e comportamento del timer"
+  },
+  "Pomodoro timers": {
+    "Pomodoro timers": "Timer Pomodoro"
+  },
+  "Available timers (work/break)": {
+    "Available timers (work/break)": "Timer disponibili (lavoro/pausa)"
+  },
+  "Comma-separated pairs in minutes, e.g. 25/5, 50/10, 90/15. Use whole numbers from 1 to 1440. Select a timer using the icon at the top right of the widget.": {
+    "Comma-separated pairs in minutes, e.g. 25/5, 50/10, 90/15. Use whole numbers from 1 to 1440. Select a timer using the icon at the top right of the widget.": "Coppie in minuti separate da virgole, ad esempio: 25/5, 50/10, 90/15. Durate intere da 1 a 1440. Selezionale dall’icona in alto a destra del widget."
+  },
+  "Behavior": {
+    "Behavior": "Comportamento"
+  },
+  "Auto-start breaks": {
+    "Auto-start breaks": "Avvia automaticamente le pause"
+  },
+  "Start the short break when work finishes": {
+    "Start the short break when work finishes": "Avvia la pausa breve al completamento del lavoro"
+  },
+  "Auto-start work": {
+    "Auto-start work": "Avvia automaticamente il lavoro"
+  },
+  "Start a work session when the break finishes": {
+    "Start a work session when the break finishes": "Avvia una sessione di lavoro al termine della pausa"
+  },
+  "Do Not Disturb during work": {
+    "Do Not Disturb during work": "Non disturbare durante il lavoro"
+  },
+  "Enable Do Not Disturb during work sessions": {
+    "Enable Do Not Disturb during work sessions": "Attiva Non disturbare durante le sessioni di lavoro"
+  },
+  "Show timer text in the bar": {
+    "Show timer text in the bar": "Mostra il tempo nella barra"
+  },
+  "Show the remaining time next to the icon": {
+    "Show the remaining time next to the icon": "Mostra il tempo rimanente accanto all’icona"
+  },
+  "Completion sound": {
+    "Completion sound": "Suono al completamento"
+  },
+  "Play a sound when work or a break finishes": {
+    "Play a sound when work or a break finishes": "Riproduce un suono al termine del lavoro o della pausa"
+  },
+  "How it works": {
+    "How it works": "Come funziona"
+  },
+  "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires at least one recorded minute per day. The dashboard keeps your work minutes and groups them by day, month or year.": {
+    "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires at least one recorded minute per day. The dashboard keeps your work minutes and groups them by day, month or year.": "Alterna sessioni di lavoro e pause brevi.\n\n• Pausa sospende il timer senza salvare.\n• Registra sessione salva i minuti interi e prepara un nuovo timer di lavoro.\n• Reset scarta la sessione corrente.\n• Le sessioni completate si salvano automaticamente.\n\nLa streak richiede almeno un minuto registrato al giorno. La dashboard conserva i minuti di lavoro e li raggruppa per giorno, mese o anno."
+  },
+  "%1 min today": {
+    "%1 min today": "%1 min oggi"
+  },
+  "Streak: 1 day": {
+    "Streak: 1 day": "Streak: 1 giorno"
+  },
+  "Streak: %1 days": {
+    "Streak: %1 days": "Streak: %1 giorni"
+  },
+  "Session recorded: %1 min": {
+    "Session recorded: %1 min": "Sessione registrata: %1 min"
+  },
+  "%1 min": {
+    "%1 min": "%1 min"
+  },
+  "%1: 1 minute": {
+    "%1: 1 minute": "%1: 1 minuto"
+  },
+  "%1: %2 minutes": {
+    "%1: %2 minutes": "%1: %2 minuti"
+  },
+  "Jan": {
+    "Jan": "gen"
+  },
+  "Feb": {
+    "Feb": "feb"
+  },
+  "Mar": {
+    "Mar": "mar"
+  },
+  "Apr": {
+    "Apr": "apr"
+  },
+  "May": {
+    "May": "mag"
+  },
+  "Jun": {
+    "Jun": "giu"
+  },
+  "Jul": {
+    "Jul": "lug"
+  },
+  "Aug": {
+    "Aug": "ago"
+  },
+  "Sep": {
+    "Sep": "set"
+  },
+  "Oct": {
+    "Oct": "ott"
+  },
+  "Nov": {
+    "Nov": "nov"
+  },
+  "Dec": {
+    "Dec": "dic"
+  },
+  "Timer is running": {
+    "Timer is running": "Timer in esecuzione"
+  },
+  "Timer is paused": {
+    "Timer is paused": "Timer in pausa"
+  },
+  "Quick Actions": {
+    "Quick Actions": "Azioni rapide"
+  },
+  "Long break": {
+    "Long break": "Pausa lunga"
+  },
+  "Long break duration (minutes)": {
+    "Long break duration (minutes)": "Durata della pausa lunga (minuti)"
+  },
+  "Optional manual break, from 1 to 1440 minutes. Default: 15.": {
+    "Optional manual break, from 1 to 1440 minutes. Default: 15.": "Pausa manuale opzionale, da 1 a 1440 minuti. Valore predefinito: 15."
+  },
+  "Show the work quick action": {
+    "Show the work quick action": "Mostra l’azione rapida di lavoro"
+  },
+  "Show the short break quick action": {
+    "Show the short break quick action": "Mostra l’azione rapida di pausa breve"
+  },
+  "Show the optional long break quick action": {
+    "Show the optional long break quick action": "Mostra l’azione rapida opzionale di pausa lunga"
+  },
+  "Show the dashboard quick action": {
+    "Show the dashboard quick action": "Mostra l’azione rapida della dashboard"
+  },
+  "Work (minutes)": {
+    "Work (minutes)": "Lavoro (minuti)"
+  },
+  "Short break (minutes)": {
+    "Short break (minutes)": "Pausa breve (minuti)"
+  },
+  "Long break (minutes)": {
+    "Long break (minutes)": "Pausa lunga (minuti)"
+  },
+  "Add timer": {
+    "Add timer": "Aggiungi timer"
+  },
+  "Remove timer": {
+    "Remove timer": "Rimuovi timer"
+  },
+  "Close": {
+    "Close": "Chiudi"
+  },
+  "Sunday": {
+    "Sunday": "Domenica"
+  },
+  "Monday": {
+    "Monday": "Lunedì"
+  },
+  "Tuesday": {
+    "Tuesday": "Martedì"
+  },
+  "Wednesday": {
+    "Wednesday": "Mercoledì"
+  },
+  "Thursday": {
+    "Thursday": "Giovedì"
+  },
+  "Friday": {
+    "Friday": "Venerdì"
+  },
+  "Saturday": {
+    "Saturday": "Sabato"
+  },
+  "Work minutes by period": {
+    "Work minutes by period": "Minuti di lavoro per periodo"
+  },
+  "%1: %2 min": {
+    "%1: %2 min": "%1: %2 min"
+  },
+  "Minutes this week": {
+    "Minutes this week": "Minuti questa settimana"
+  },
+  "%1% vs last week": {
+    "%1% vs last week": "%1% rispetto alla settimana scorsa"
+  },
+  "New activity this week": {
+    "New activity this week": "Nuova attività questa settimana"
+  },
+  "No change from last week": {
+    "No change from last week": "Nessuna variazione dalla settimana scorsa"
+  },
+  "Sessions this week": {
+    "Sessions this week": "Sessioni questa settimana"
+  },
+  "%1 recorded session": {
+    "%1 recorded session": "%1 sessione registrata"
+  },
+  "%1 recorded sessions": {
+    "%1 recorded sessions": "%1 sessioni registrate"
+  },
+  "Average session length": {
+    "Average session length": "Durata media delle sessioni"
+  },
+  "Your typical focus time": {
+    "Your typical focus time": "La durata abituale del tuo lavoro"
+  },
+  "Goals hit this month": {
+    "Goals hit this month": "Obiettivi raggiunti questo mese"
+  },
+  "%1 day": {
+    "%1 day": "%1 giorno"
+  },
+  "%1 days": {
+    "%1 days": "%1 giorni"
+  },
+  "%1 min daily goal": {
+    "%1 min daily goal": "Obiettivo giornaliero: %1 min"
+  },
+  "Set a daily goal in settings": {
+    "Set a daily goal in settings": "Imposta un obiettivo nelle impostazioni"
+  },
+  "Productivity insights": {
+    "Productivity insights": "Indicatori di produttività"
+  },
+  "Peak hour": {
+    "Peak hour": "Ora più produttiva"
+  },
+  "Best day": {
+    "Best day": "Giorno migliore"
+  },
+  "Current streak": {
+    "Current streak": "Streak attuale"
+  },
+  "Focus time breakdown": {
+    "Focus time breakdown": "Distribuzione del tempo di lavoro"
+  },
+  "Weeks": {
+    "Weeks": "Settimane"
+  },
+  "Weekday": {
+    "Weekday": "Giorno della settimana"
+  },
+  "All recorded days": {
+    "All recorded days": "Tutti i giorni registrati"
+  },
+  "%1 total hours": {
+    "%1 total hours": "%1 ore totali"
+  },
+  "%1 total minutes": {
+    "%1 total minutes": "%1 minuti totali"
+  },
+  "Session counts, averages and peak hour are tracked from %1.": {
+    "Session counts, averages and peak hour are tracked from %1.": "Conteggi delle sessioni, medie e ora più produttiva sono registrati dal %1."
+  },
+  "Record a session to start tracking session statistics.": {
+    "Record a session to start tracking session statistics.": "Registra una sessione per iniziare a raccogliere le statistiche sulle sessioni."
+  },
+  "Daily goal (minutes)": {
+    "Daily goal (minutes)": "Obiettivo giornaliero (minuti)"
+  },
+  "Daily focus target for the dashboard. Set 0 to disable. Default: 60.": {
+    "Daily focus target for the dashboard. Set 0 to disable. Default: 60.": "Obiettivo giornaliero di lavoro per la dashboard. Imposta 0 per disattivarlo. Valore predefinito: 60."
+  }
+}

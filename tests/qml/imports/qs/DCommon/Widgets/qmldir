@@ -1,0 +1,8 @@
+module qs.DCommon.Widgets
+StyledText 1.0 StyledText.qml
+StyledRect 1.0 StyledRect.qml
+DIcon 1.0 DIcon.qml
+DButton 1.0 DButton.qml
+NumericText 1.0 NumericText.qml
+DDropdown 1.0 DDropdown.qml
+DTextField 1.0 DTextField.qml

@@ -1,0 +1,18 @@
+{
+    "id": "dankPomodoroTimerPlusPlus",
+    "name": "Dank Pomodoro Timer++",
+    "description": "Pomodoro timer with configurable presets, work minutes, streaks and history dashboard",
+    "version": "1.5.0",
+    "license": "MIT",
+    "author": "Dux Labs; Pomodoro++ contributors",
+    "icon": "timer",
+    "firstParty": false,
+    "component": "./DankPomodoroWidget.qml",
+    "settings": "./DankPomodoroSettings.qml",
+    "permissions": [
+        "settings_read",
+        "settings_write"
+    ],
+    "requires_dms": ">=2.0.0"
+}
+
