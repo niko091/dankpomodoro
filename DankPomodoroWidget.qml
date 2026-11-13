@@ -11,6 +11,7 @@ import "Pomodoro.js" as Logic
 
 PluginComponent {
     id: root
+    layerNamespacePlugin: "pomodoro-timer-plus-plus"
     popoutWidth: 400
     readonly property var timerPresets: Logic.Pomodoro.parsePresets(pluginData.timerProfiles ?? pluginData.timerPresets, pluginData.longBreakDuration)
     property string selectedPresetKey: ""
@@ -378,6 +379,7 @@ PluginComponent {
 
     popoutContent: Component {
         PopoutComponent {
+            id: timerPopout
             headerText: I18n.trFor("dankPomodoroTimerPlusPlus", "Pomodoro Timer++")
             detailsText: I18n.trFor("dankPomodoroTimerPlusPlus", "%1 min today").arg(root.todayMinutes) + "  •  " + (root.streakDays === 1 ? I18n.trFor("dankPomodoroTimerPlusPlus", "Streak: 1 day") : I18n.trFor("dankPomodoroTimerPlusPlus", "Streak: %1 days").arg(root.streakDays)) + "  •  " + root.selectedTimerLabel
             headerActions: Component {
@@ -400,6 +402,7 @@ PluginComponent {
                     DDropdown {
                         id: presetMenu
                         objectName: "presetMenu"
+                        transientSurfaceTracker: timerPopout.parentPopout?.transientSurfaceTracker ?? null
                         showTrigger: false
                         popupAnchorItem: presetButton
                         focusReturnTarget: presetButton

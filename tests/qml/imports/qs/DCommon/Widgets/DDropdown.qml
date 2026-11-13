@@ -4,6 +4,7 @@ import QtQuick.Controls
 // Qt popup substitute for DMS's Wayland dropdown surface.
 Item {
     id: root
+    property var transientSurfaceTracker: null
     property bool showTrigger: true
     property Item popupAnchorItem
     property Item focusReturnTarget

@@ -214,6 +214,11 @@ TestCase {
         const menu = findChild(popup, "presetMenu");
         verify(button !== null);
         verify(menu !== null);
+        compare(widget.layerNamespacePlugin, "pomodoro-timer-plus-plus");
+        compare(menu.transientSurfaceTracker, null);
+        const tracker = { active: true };
+        popup.parentPopout = { transientSurfaceTracker: tracker };
+        compare(menu.transientSurfaceTracker, tracker);
         const contentHeight = popup.height;
         mouseClick(button);
         compare(menu.menuOpen, true);
