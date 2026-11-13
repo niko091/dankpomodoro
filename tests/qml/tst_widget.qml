@@ -73,6 +73,26 @@ TestCase {
         }
     }
 
+    function test_hiddenSurfaceSleepsWhenIdleAndStillCompletesWork() {
+        widget.surfaceLive = false;
+        const housekeeping = findChild(widget, "housekeepingTimer");
+        compare(housekeeping.running, false);
+        widget.today = new Date(2000, 0, 1);
+        widget.surfaceLive = true;
+        tryVerify(() => Logic.Pomodoro.dateKey(widget.today) === Logic.Pomodoro.dateKey(new Date()));
+        widget.surfaceLive = false;
+        widget.toggleTimer();
+        compare(housekeeping.running, true);
+        PluginService.setGlobalVar(widget.pluginId, "timer",
+            Logic.Pomodoro.toggle(Logic.Pomodoro.createTimer("work", 25), Date.now() - 1500000));
+        tryCompare(widget, "totalMinutes", 25);
+        compare(widget.timer.mode, "shortBreak");
+        compare(widget.timer.running, false);
+        compare(housekeeping.running, false);
+        widget.dashboardVisible = true;
+        compare(housekeeping.running, true);
+    }
+
     function test_weeklyCardsAlignmentAndComparison() {
         widget.today = new Date(2026, 10, 7, 12);
         widget.history = { "2026-10-26": 100, "2026-11-02": 150 };

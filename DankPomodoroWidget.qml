@@ -134,6 +134,7 @@ PluginComponent {
     }
 
     Timer {
+        objectName: "sessionTimer"
         interval: 250
         repeat: true
         running: root.timer.running && globalTimerOwnerId.value === root.instanceId
@@ -145,9 +146,11 @@ PluginComponent {
     }
 
     Timer {
-        interval: 1000
+        objectName: "housekeepingTimer"
+        interval: root.timer.running ? 1000 : 60000
         repeat: true
-        running: true
+        triggeredOnStart: true
+        running: root.surfaceLive || root.interactionActive || root.dashboardVisible || root.timer.running
         onTriggered: {
             const now = new Date();
             if (Logic.Pomodoro.dateKey(now) !== Logic.Pomodoro.dateKey(root.today))

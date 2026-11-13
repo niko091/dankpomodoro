@@ -2,6 +2,8 @@ import QtQuick
 Item {
     id: root
     property string layerNamespacePlugin: "plugin"
+    property bool surfaceLive: true
+    property bool interactionActive: false
     property var pluginData: ({})
     property var pluginService: null
     property string pluginId: ""
