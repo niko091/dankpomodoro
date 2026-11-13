@@ -7,6 +7,7 @@ QtObject {
     readonly property color warning: "#efc080"
     readonly property color success: "#4caf50"
     readonly property color error: "#f2b8b5"
+    readonly property color surface: "#17181d"
     readonly property color surfaceText: "#eeeeee"
     readonly property color surfaceVariantText: "#aaaaaa"
     readonly property color widgetTextColor: "#eeeeee"
