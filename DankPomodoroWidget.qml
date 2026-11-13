@@ -437,6 +437,7 @@ PluginComponent {
                             border.color: Qt.alpha(root.getStateColor(), 0.2)
                             Canvas {
                                 id: progressCanvas
+                                renderStrategy: Canvas.Cooperative
                                 width: parent.width - 16
                                 height: parent.height - 16
                                 anchors.centerIn: parent

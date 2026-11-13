@@ -36,6 +36,7 @@ Item {
 
     Canvas {
         id: plot
+        renderStrategy: Canvas.Cooperative
         anchors.fill: parent
         onPaint: {
             const ctx = getContext("2d");
