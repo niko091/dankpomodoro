@@ -6,13 +6,15 @@
     "license": "MIT",
     "author": "Dux Labs; Pomodoro++ contributors",
     "icon": "timer",
+    "type": "widget",
     "firstParty": false,
     "component": "./DankPomodoroWidget.qml",
     "settings": "./DankPomodoroSettings.qml",
     "permissions": [
         "settings_read",
-        "settings_write"
+        "settings_write",
+        "process"
     ],
-    "requires_dms": ">=2.0.0"
+    "requires_dms": ">=2.1.0"
 }
 

@@ -34,4 +34,6 @@ test("visible UI literals use DMS translation calls; metadata defaults to Englis
     }
     const manifest = JSON.parse(read("plugin.json"));
     assert.equal(manifest.description, "Pomodoro timer with configurable presets, work minutes, streaks and history dashboard");
+    assert.equal(manifest.type, "widget");
+    assert.ok(manifest.permissions.includes("process"), "Completion notifications execute the dms command");
 });
