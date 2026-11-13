@@ -27,7 +27,7 @@ Rectangle {
         y: card.compact ? (parent.height - height) / 2 : 20
         width: card.compact ? 36 : 44
         height: width
-        radius: 12
+        radius: Theme.cornerRadius
         color: Qt.alpha(card.accent, 0.16)
         DIcon {
             anchors.centerIn: parent
@@ -48,7 +48,7 @@ Rectangle {
             width: parent.width
             text: card.compact ? card.title : card.value
             color: card.compact ? Theme.surfaceVariantText : Theme.surfaceText
-            font.pixelSize: card.compact ? Theme.fontSizeSmall : 26
+            font.pixelSize: card.compact ? Theme.fontSizeSmall : Theme.fontSizeXXLarge
             font.weight: card.compact ? Font.Normal : Font.DemiBold
             elide: Text.ElideRight
         }
@@ -58,7 +58,7 @@ Rectangle {
             width: parent.width
             text: card.compact ? card.value : card.title
             color: Theme.surfaceText
-            font.pixelSize: card.compact ? 20 : Theme.fontSizeMedium
+            font.pixelSize: card.compact ? Theme.fontSizeXLarge : Theme.fontSizeMedium
             font.weight: card.compact ? Font.Medium : Font.Normal
             wrapMode: card.compact ? Text.NoWrap : Text.WordWrap
             elide: Text.ElideRight
@@ -66,12 +66,12 @@ Rectangle {
         Rectangle {
             objectName: "statComparison"
             readonly property string text: card.detail
-            readonly property color comparisonColor: card.comparisonChange === null ? Theme.surfaceVariantText : card.comparisonChange < 0 ? "#b42318" : "#087f5b"
+            readonly property color comparisonColor: card.comparisonChange === null ? Theme.surfaceVariantText : card.comparisonChange < 0 ? Theme.error : Theme.success
             width: card.comparisonBadge ? Math.min(parent.width, comparisonText.implicitWidth + 16) : parent.width
             height: comparisonText.implicitHeight + (card.comparisonBadge ? 8 : 0)
             visible: card.detail.length > 0
             radius: height / 2
-            color: !card.comparisonBadge ? "transparent" : card.comparisonChange === null ? Theme.surfaceContainerHighest : card.comparisonChange < 0 ? "#fee4e2" : "#dcfae6"
+            color: !card.comparisonBadge ? "transparent" : card.comparisonChange === null ? Theme.surfaceContainerHighest : Qt.alpha(comparisonColor, 0.16)
             StyledText {
                 id: comparisonText
                 anchors.fill: parent

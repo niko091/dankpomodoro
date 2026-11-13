@@ -5,6 +5,8 @@ QtObject {
     readonly property color secondary: "#ed9bc6"
     readonly property color info: "#89d6d2"
     readonly property color warning: "#efc080"
+    readonly property color success: "#4caf50"
+    readonly property color error: "#f2b8b5"
     readonly property color surfaceText: "#eeeeee"
     readonly property color surfaceVariantText: "#aaaaaa"
     readonly property color widgetTextColor: "#eeeeee"
@@ -18,6 +20,9 @@ QtObject {
     readonly property int fontSizeSmall: 12
     readonly property int fontSizeMedium: 14
     readonly property int fontSizeLarge: 18
+    readonly property int fontSizeXLarge: 20
+    readonly property int fontSizeXXLarge: 28
+    readonly property int fontSizeDisplay: 36
     readonly property int iconSize: 24
     function barIconSize() { return 24; }
     function barTextSize() { return 14; }

@@ -462,7 +462,7 @@ PluginComponent {
                                 spacing: Theme.spacingXS
                                 StyledText {
                                     text: Logic.Pomodoro.formatTime(root.displayMs)
-                                    font.pixelSize: 36
+                                    font.pixelSize: Theme.fontSizeDisplay
                                     font.weight: Font.Bold
                                     color: root.getStateColor()
                                     anchors.horizontalCenter: parent.horizontalCenter

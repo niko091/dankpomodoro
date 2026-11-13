@@ -60,7 +60,7 @@ DModal {
                     anchors.verticalCenter: parent.verticalCenter
                     text: dashboard.windowTitle
                     color: Theme.surfaceText
-                    font.pixelSize: 26
+                    font.pixelSize: Theme.fontSizeXXLarge
                     font.weight: Font.DemiBold
                 }
                 PomodoroIconButton {
