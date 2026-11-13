@@ -74,19 +74,38 @@ generates `Pomodoro.js`, which is committed and loaded directly by QML.
 
 ```sh
 npm run check       # TypeScript checks
+npm run validate:plugin # Manifest, runtime dependencies and entry points
 npm test            # Timer, statistics and translation tests
 npm run test:qml    # Qt Quick interaction tests
 npm run lint:qml    # QML syntax/format parsing
 npm run package     # Build the distributable archive
+npm run verify:package # Verify the archive matches the current sources
 ```
 
-The QML scripts expect Qt 6 tools under `/usr/lib/qt6/bin`. The tests run
+The QML scripts default to Qt 6 tools under `/usr/lib/qt6/bin`; set `QT_BIN_DIR`
+to use another installation. The tests run
 offscreen against local DMS/Quickshell substitutes; they do not replace a live
 check in DMS. Check horizontal and vertical hosts, multiple instances, opening
 the preset selector from a hover popout, and completing work with the bar hidden.
 
 Idle updates stop when the host is hidden. Active timers keep running so work
 is recorded and completion notifications arrive while a bar or dock is hidden.
+
+## Continuous integration
+
+[Plugin CI](.github/workflows/ci.yml) runs on every push and pull request, and
+can also be started manually from GitHub Actions. It checks the manifest and
+documented DMS dependency replacements, TypeScript, timer/statistics/translation
+tests, committed JavaScript consistency, QML parsing and offscreen interactions
+with Qt 6.8.3. It also builds and verifies the runtime archive and uploads it as
+an artifact retained for 14 days. Pull requests from forks need no repository secrets.
+
+These checks cover this plugin repository. The registry's own `generate.py` and
+`validate_links.py` checks must still run on the submission in a fork of
+`dux-plugin-registry`, where the registry JSON, screenshot URL and compositor
+declarations live. Screenshots, live compositor tests, upstream differentiation
+and the registry's human-authored submission requirements remain release checks;
+a green CI result does not certify them.
 
 ## Translations
 

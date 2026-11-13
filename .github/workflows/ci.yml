@@ -1,0 +1,70 @@
+name: Plugin CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Manifest, logic and package
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run validate:plugin
+      - run: npm run check
+      - run: npm test
+      - name: Check committed JavaScript matches TypeScript
+        run: git diff --exit-code -- Pomodoro.js
+      - run: npm run package
+      - run: npm run verify:package
+      - name: Upload verified plugin archive
+        uses: actions/upload-artifact@v7
+        with:
+          name: DankPomodoroTimerPlusPlus
+          path: dist/DankPomodoroTimerPlusPlus.tar.gz
+          if-no-files-found: error
+          retention-days: 14
+
+  qml:
+    name: QML interactions
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install Qt runtime libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y libegl1 libopengl0 libxkbcommon-x11-0 libxcb-cursor0
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          cache: true
+      - run: npm ci
+      - run: npm run build
+      - name: Parse QML files
+        run: npm run lint:qml
+        env:
+          QT_BIN_DIR: ${{ env.QT_ROOT_DIR }}/bin
+      - name: Run offscreen Qt Quick tests
+        run: npm run test:qml
+        env:
+          QT_BIN_DIR: ${{ env.QT_ROOT_DIR }}/bin

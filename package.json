@@ -7,10 +7,12 @@
   "scripts": {
     "build": "tsc",
     "check": "tsc --noEmit",
+    "validate:plugin": "node scripts/validate-plugin.ts",
+    "verify:package": "node scripts/verify-package.ts",
     "package": "npm run build && node scripts/package.ts",
     "test": "npm run build && TZ=Europe/Rome node --test --test-isolation=none tests/*.test.ts",
-    "test:qml": "QML_XHR_ALLOW_FILE_READ=1 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software /usr/lib/qt6/bin/qmltestrunner -input tests/qml -import tests/qml/imports",
-    "lint:qml": "/usr/lib/qt6/bin/qmlformat DankPomodoroWidget.qml DankPomodoroSettings.qml MinuteChart.qml PomodoroIconButton.qml PomodoroPresetsSetting.qml PomodoroDashboard.qml DashboardStatCard.qml FocusChart.qml > /dev/null"
+    "test:qml": "QML_XHR_ALLOW_FILE_READ=1 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software \"${QT_BIN_DIR:-/usr/lib/qt6/bin}/qmltestrunner\" -input tests/qml -import tests/qml/imports",
+    "lint:qml": "\"${QT_BIN_DIR:-/usr/lib/qt6/bin}/qmlformat\" DankPomodoroWidget.qml DankPomodoroSettings.qml MinuteChart.qml PomodoroIconButton.qml PomodoroPresetsSetting.qml PomodoroDashboard.qml DashboardStatCard.qml FocusChart.qml > /dev/null"
   },
   "devDependencies": {
     "typescript": "5.9.3"
