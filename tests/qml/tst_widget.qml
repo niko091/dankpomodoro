@@ -57,6 +57,65 @@ TestCase {
         verify(createTemporaryObject(settingsFactory, testCase) !== null);
     }
 
+    function test_weeklyCardsAlignmentAndComparison() {
+        widget.today = new Date(2026, 10, 7, 12);
+        widget.history = { "2026-10-26": 100, "2026-11-02": 150 };
+        widget.sessionStats = Logic.Pomodoro.cleanSessionStats({ sessionsByDay: { "2026-10-26": 2, "2026-11-02": 3 } });
+        widget.dashboardVisible = true;
+        wait(10);
+        for (const name of ["weeklyMinutesCard", "weeklySessionsCard"]) {
+            const card = findChild(widget.dashboardWindow, name);
+            verify(card !== null);
+            const value = findChild(card, "statValue");
+            const icon = findChild(card, "statIcon");
+            const title = findChild(card, "statTitle");
+            const comparison = findChild(card, "statComparison");
+            const textTop = value.mapToItem(card, 0, 0).y;
+            const textBottom = title.mapToItem(card, 0, title.height).y;
+            compare(textTop, icon.y);
+            compare(comparison.text, "+50% vs last week");
+            verify(comparison.mapToItem(card, 0, 0).y >= textBottom);
+        }
+        const minutesCard = findChild(widget.dashboardWindow, "weeklyMinutesCard");
+        const valueY = findChild(minutesCard, "statValue").mapToItem(minutesCard, 0, 0).y;
+        const titleY = findChild(minutesCard, "statTitle").mapToItem(minutesCard, 0, 0).y;
+        for (const name of ["weeklySessionsCard", "averageSessionCard", "monthlyGoalsCard"]) {
+            const card = findChild(widget.dashboardWindow, name);
+            compare(findChild(card, "statValue").mapToItem(card, 0, 0).y, valueY);
+            compare(findChild(card, "statTitle").mapToItem(card, 0, 0).y, titleY);
+        }
+        widget.history = { "2026-11-02": 150 };
+        const minutesComparison = findChild(findChild(widget.dashboardWindow, "weeklyMinutesCard"), "statComparison");
+        compare(minutesComparison.visible, true);
+        compare(minutesComparison.text, "— vs last week");
+        widget.history = {};
+        compare(minutesComparison.text, "0% vs last week");
+    }
+
+    function test_streakMinimumSetting() {
+        widget.today = new Date(2026, 10, 7, 12);
+        widget.history = { "2026-11-05": 25, "2026-11-06": 30, "2026-11-07": 10 };
+        compare(widget.streakMinimumMinutes, 1);
+        compare(widget.streakDays, 3);
+        const settings = createTemporaryObject(settingsFactory, testCase);
+        const field = findChild(settings, "streakMinimumMinutesSetting");
+        verify(field !== null);
+        compare(field.settingKey, "streakMinimumMinutes");
+        compare(field.defaultValue, "1");
+        settings.saveValue(field.settingKey, "25");
+        compare(widget.streakMinimumMinutes, 25);
+        compare(widget.streakDays, 2);
+        compare(widget.dashboardWindow.summary.streakDays, 2);
+        const reopened = createTemporaryObject(widgetFactory, testCase);
+        compare(reopened.streakMinimumMinutes, 25);
+        settings.saveValue(field.settingKey, "40");
+        compare(widget.streakDays, 0);
+        compare(widget.dashboardWindow.summary.streakDays, 0);
+        settings.saveValue(field.settingKey, "bad");
+        compare(widget.streakMinimumMinutes, 1);
+        compare(widget.streakDays, 3);
+    }
+
     function test_recordPauseResetAndReload() {
         const now = Date.now();
         PluginService.setGlobalVar(widget.pluginId, "timer",
@@ -404,7 +463,9 @@ TestCase {
         verify(widget.popoutClosed);
         compare(dashboard.positioning, "center");
         compare(dashboard.modalWidth, 1100);
-        compare(dashboard.modalHeight, 940);
+        tryVerify(() => dashboard.preferredContentHeight > 320);
+        compare(dashboard.modalHeight, dashboard.preferredContentHeight);
+        verify(dashboard.modalHeight < 940);
         verify(widget.timer.running);
         compare(dashboard.summary.totalMinutes, 60);
         compare(dashboard.summary.totalSessions, 0);

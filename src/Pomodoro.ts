@@ -177,11 +177,12 @@ namespace Pomodoro {
         return Object.keys(history).reduce((total, key) => total + history[key], 0);
     }
 
-    export function streak(history: History, now: Date): number {
+    export function streak(history: History, now: Date, minimumMinutes: unknown = 1): number {
+        const minimum = validDuration(minimumMinutes, 1);
         const cursor = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
-        if (!(history[dateKey(cursor)] >= 1)) cursor.setDate(cursor.getDate() - 1);
+        if (!(history[dateKey(cursor)] >= minimum)) cursor.setDate(cursor.getDate() - 1);
         let days = 0;
-        while (history[dateKey(cursor)] >= 1) {
+        while (history[dateKey(cursor)] >= minimum) {
             days++;
             cursor.setDate(cursor.getDate() - 1);
         }

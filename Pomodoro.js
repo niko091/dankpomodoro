@@ -68,7 +68,7 @@ var Pomodoro;
     function sumPeriod(history, begin, end) {
         return Object.keys(history).reduce((total, key) => total + (key >= begin && key <= end ? history[key] : 0), 0);
     }
-    function dashboardSummary(history, stats, now, goal) {
+    function dashboardSummary(history, stats, now, goal, streakMinimumMinutes = 1) {
         const today = Pomodoro.dateKey(now);
         const start = monday(now);
         const previous = new Date(start);
@@ -77,6 +77,8 @@ var Pomodoro;
         previousEnd.setDate(previousEnd.getDate() - 1);
         const weekMinutes = sumPeriod(history, Pomodoro.dateKey(start), today);
         const previousWeekMinutes = sumPeriod(history, Pomodoro.dateKey(previous), Pomodoro.dateKey(previousEnd));
+        const sessionsThisWeek = sumPeriod(stats.sessionsByDay, Pomodoro.dateKey(start), today);
+        const previousWeekSessions = sumPeriod(stats.sessionsByDay, Pomodoro.dateKey(previous), Pomodoro.dateKey(previousEnd));
         const totalSessions = Pomodoro.totalMinutes(stats.sessionsByDay);
         const trackedMinutes = Pomodoro.totalMinutes(stats.minutesByDay);
         const weekdays = [0, 0, 0, 0, 0, 0, 0];
@@ -102,13 +104,14 @@ var Pomodoro;
             totalSessions,
             weekMinutes,
             previousWeekMinutes,
-            weekChange: previousWeekMinutes > 0 ? Math.round((weekMinutes - previousWeekMinutes) / previousWeekMinutes * 100) : null,
-            sessionsThisWeek: sumPeriod(stats.sessionsByDay, Pomodoro.dateKey(start), today),
+            weekChange: previousWeekMinutes > 0 ? Math.round((weekMinutes - previousWeekMinutes) / previousWeekMinutes * 100) : weekMinutes === 0 ? 0 : null,
+            sessionsThisWeek,
+            sessionsWeekChange: previousWeekSessions > 0 ? Math.round((sessionsThisWeek - previousWeekSessions) / previousWeekSessions * 100) : null,
             averageMinutes: totalSessions > 0 ? Math.round(trackedMinutes / totalSessions * 10) / 10 : null,
             goalsHit,
             peakHour,
             bestWeekday: bestMinutes > 0 ? weekdays.indexOf(bestMinutes) : null,
-            streakDays: Pomodoro.streak(history, now)
+            streakDays: Pomodoro.streak(history, now, streakMinimumMinutes)
         };
     }
     Pomodoro.dashboardSummary = dashboardSummary;
@@ -315,12 +318,13 @@ var Pomodoro;
         return Object.keys(history).reduce((total, key) => total + history[key], 0);
     }
     Pomodoro.totalMinutes = totalMinutes;
-    function streak(history, now) {
+    function streak(history, now, minimumMinutes = 1) {
+        const minimum = validDuration(minimumMinutes, 1);
         const cursor = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
-        if (!(history[dateKey(cursor)] >= 1))
+        if (!(history[dateKey(cursor)] >= minimum))
             cursor.setDate(cursor.getDate() - 1);
         let days = 0;
-        while (history[dateKey(cursor)] >= 1) {
+        while (history[dateKey(cursor)] >= minimum) {
             days++;
             cursor.setDate(cursor.getDate() - 1);
         }

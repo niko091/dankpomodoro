@@ -13,10 +13,12 @@ DModal {
     property var sessionStats: Logic.Pomodoro.cleanSessionStats({})
     property var today: new Date()
     property int dailyGoalMinutes: 60
+    property int streakMinimumMinutes: 1
     property string grouping: "days"
     property int chartPage: 0
+    property real preferredContentHeight: SettingsMetrics.windowHeight
     readonly property string windowTitle: I18n.trFor(pluginId, "Pomodoro Dashboard")
-    readonly property var summary: Logic.Pomodoro.dashboardSummary(history, sessionStats, today, dailyGoalMinutes)
+    readonly property var summary: Logic.Pomodoro.dashboardSummary(history, sessionStats, today, dailyGoalMinutes, streakMinimumMinutes)
     readonly property var chartData: Logic.Pomodoro.dashboardChart(history, today, grouping, chartPage)
     readonly property bool canGoBack: Logic.Pomodoro.dashboardHasEarlier(history, chartData, grouping)
     readonly property var weekdayNames: [I18n.trFor(pluginId, "Sunday"), I18n.trFor(pluginId, "Monday"), I18n.trFor(pluginId, "Tuesday"), I18n.trFor(pluginId, "Wednesday"), I18n.trFor(pluginId, "Thursday"), I18n.trFor(pluginId, "Friday"), I18n.trFor(pluginId, "Saturday")]
@@ -27,15 +29,24 @@ DModal {
     function sessionsLabel(count) {
         return (count === 1 ? I18n.trFor(pluginId, "%1 recorded session") : I18n.trFor(pluginId, "%1 recorded sessions")).arg(count);
     }
+    function weekComparison(change) {
+        return change === null ? "" : I18n.trFor(dashboard.pluginId, "%1% vs last week").arg((change > 0 ? "+" : "") + change);
+    }
     positioning: "center"
     modalWidth: Math.min(SettingsMetrics.windowWidth, Math.max(320, screenWidth - Theme.spacingL * 2))
-    modalHeight: Math.min(SettingsMetrics.windowHeight, Math.max(320, screenHeight - SettingsMetrics.pagePaddingH * 2 - Theme.spacingL))
+    modalHeight: Math.min(preferredContentHeight, SettingsMetrics.windowHeight, Math.max(320, screenHeight - SettingsMetrics.pagePaddingH * 2 - Theme.spacingL))
     onBackgroundClicked: close()
 
     content: Component {
         Item {
             id: page
+            implicitHeight: heading.y + heading.height + 16 + dashboardColumn.implicitHeight + 24
             focus: true
+            Binding {
+                target: dashboard
+                property: "preferredContentHeight"
+                value: page.implicitHeight
+            }
             Keys.onEscapePressed: dashboard.close()
             Item {
                 id: heading
@@ -80,39 +91,43 @@ DModal {
                     spacing: 20
                     Grid {
                         width: parent.width
-                        columns: width >= 850 ? 4 : 2
+                        columns: Math.max(1, Math.min(4, Math.floor((width + spacing) / 266)))
                         spacing: 16
                         property real cardWidth: (width - spacing * (columns - 1)) / columns
                         DashboardStatCard {
+                            objectName: "weeklyMinutesCard"
                             width: parent.cardWidth
                             iconName: "schedule"
                             title: I18n.trFor(dashboard.pluginId, "Minutes this week")
                             value: String(dashboard.summary.weekMinutes)
-                            detail: dashboard.summary.weekChange !== null ? I18n.trFor(dashboard.pluginId, "%1% vs last week").arg((dashboard.summary.weekChange > 0 ? "+" : "") + dashboard.summary.weekChange) : dashboard.summary.weekMinutes > 0 ? I18n.trFor(dashboard.pluginId, "New activity this week") : I18n.trFor(dashboard.pluginId, "No change from last week")
+                            comparisonBadge: true
+                            comparisonChange: dashboard.summary.weekChange
+                            detail: comparisonChange === null ? I18n.trFor(dashboard.pluginId, "— vs last week") : dashboard.weekComparison(comparisonChange)
                         }
                         DashboardStatCard {
+                            objectName: "weeklySessionsCard"
                             width: parent.cardWidth
                             iconName: "stacks"
                             accent: Theme.secondary
                             title: I18n.trFor(dashboard.pluginId, "Sessions this week")
                             value: dashboard.sessionStats.trackingSince ? String(dashboard.summary.sessionsThisWeek) : "—"
-                            detail: dashboard.sessionsLabel(dashboard.summary.totalSessions)
+                            detail: dashboard.weekComparison(dashboard.summary.sessionsWeekChange)
                         }
                         DashboardStatCard {
                             width: parent.cardWidth
                             iconName: "hourglass_top"
+                            objectName: "averageSessionCard"
                             accent: Theme.info
                             title: I18n.trFor(dashboard.pluginId, "Average session length")
                             value: dashboard.summary.averageMinutes !== null ? I18n.trFor(dashboard.pluginId, "%1 min").arg(dashboard.summary.averageMinutes) : "—"
-                            detail: I18n.trFor(dashboard.pluginId, "Your typical focus time")
                         }
                         DashboardStatCard {
                             width: parent.cardWidth
                             iconName: "target"
+                            objectName: "monthlyGoalsCard"
                             accent: Theme.warning
                             title: I18n.trFor(dashboard.pluginId, "Goals hit this month")
                             value: dashboard.dailyGoalMinutes > 0 ? dashboard.daysLabel(dashboard.summary.goalsHit) : "—"
-                            detail: dashboard.dailyGoalMinutes > 0 ? I18n.trFor(dashboard.pluginId, "%1 min daily goal").arg(dashboard.dailyGoalMinutes) : I18n.trFor(dashboard.pluginId, "Set a daily goal in settings")
                         }
                     }
                     StyledRect {
@@ -235,6 +250,7 @@ DModal {
                             }
                             Row {
                                 width: parent.width
+                                visible: dashboard.grouping === "years"
                                 spacing: 8
                                 DButton {
                                     id: previousButton
@@ -246,14 +262,8 @@ DModal {
                                     enabled: dashboard.canGoBack
                                     onClicked: dashboard.chartPage++
                                 }
-                                StyledText {
+                                Item {
                                     width: Math.max(0, parent.width - (previousButton.visible ? previousButton.width + 8 : 0) - (nextButton.visible ? nextButton.width + 8 : 0))
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    text: dashboard.grouping === "weekday" ? I18n.trFor(dashboard.pluginId, "All recorded days") : dashboard.chartData[0].key + " — " + dashboard.chartData[dashboard.chartData.length - 1].key
-                                    horizontalAlignment: Text.AlignHCenter
-                                    color: Theme.surfaceVariantText
-                                    font.pixelSize: Theme.fontSizeSmall
-                                    elide: Text.ElideRight
                                 }
                                 DButton {
                                     id: nextButton
@@ -275,33 +285,29 @@ DModal {
                         radius: Theme.cornerRadius
                         Flow {
                             id: totals
-                            x: 16
+                            anchors.horizontalCenter: parent.horizontalCenter
                             y: 16
-                            width: parent.width - 32
+                            width: Math.min(parent.width - 32, totalHours.implicitWidth + totalMinutes.implicitWidth + totalSessions.implicitWidth + spacing * 2)
                             spacing: 24
                             StyledText {
+                                id: totalHours
                                 text: I18n.trFor(dashboard.pluginId, "%1 total hours").arg((dashboard.summary.totalMinutes / 60).toFixed(1))
                                 color: Theme.surfaceText
                                 font.pixelSize: Theme.fontSizeMedium
                             }
                             StyledText {
+                                id: totalMinutes
                                 text: I18n.trFor(dashboard.pluginId, "%1 total minutes").arg(dashboard.summary.totalMinutes)
                                 color: Theme.surfaceText
                                 font.pixelSize: Theme.fontSizeMedium
                             }
                             StyledText {
+                                id: totalSessions
                                 text: dashboard.sessionsLabel(dashboard.summary.totalSessions)
                                 color: Theme.surfaceText
                                 font.pixelSize: Theme.fontSizeMedium
                             }
                         }
-                    }
-                    StyledText {
-                        width: parent.width
-                        text: dashboard.sessionStats.trackingSince ? I18n.trFor(dashboard.pluginId, "Session counts, averages and peak hour are tracked from %1.").arg(dashboard.sessionStats.trackingSince) : I18n.trFor(dashboard.pluginId, "Record a session to start tracking session statistics.")
-                        color: Theme.surfaceVariantText
-                        font.pixelSize: Theme.fontSizeSmall
-                        wrapMode: Text.WordWrap
                     }
                 }
             }

@@ -102,3 +102,25 @@ test("daily goals and empty or damaged session statistics have safe defaults", (
     const cleaned = P.cleanSessionStats({ sessionsByDay: { bad: 2 }, hourlyMs: { 25: 5000, 14: -1 } });
     assert.deepEqual(plain(cleaned), { sessionsByDay: {}, minutesByDay: {}, hourlyMs: {}, trackingSince: "" });
 });
+
+test("dashboard streak follows its own minimum independently of the daily goal", () => {
+    const stats = P.cleanSessionStats({});
+    const summary = P.dashboardSummary(history, stats, now, 60, 75);
+    assert.equal(summary.streakDays, 1);
+    assert.equal(summary.goalsHit, 3);
+    assert.equal(summary.totalMinutes, 280);
+    assert.equal(P.dashboardSummary(history, stats, now, 0, 100).streakDays, 0);
+});
+
+test("weekly comparisons handle growth, declines, no change and missing baselines", () => {
+    const stats = P.cleanSessionStats({ sessionsByDay: { "2026-10-26": 2, "2026-11-02": 3 } });
+    const summary = P.dashboardSummary(history, stats, now, 60);
+    assert.equal(summary.sessionsWeekChange, 50);
+    assert.equal(P.dashboardSummary({}, P.cleanSessionStats({}), now, 60).sessionsWeekChange, null);
+    for (const [minutes, expected] of [[50, -50], [100, 0], [150, 50], [0, -100]]) {
+        const recorded = { "2026-10-26": 100, "2026-11-02": minutes };
+        assert.equal(P.dashboardSummary(recorded, stats, now, 60).weekChange, expected);
+    }
+    assert.equal(P.dashboardSummary({ "2026-11-02": 30 }, stats, now, 60).weekChange, null);
+    assert.equal(P.dashboardSummary({}, stats, now, 60).weekChange, 0);
+});

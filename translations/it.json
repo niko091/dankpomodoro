@@ -146,9 +146,6 @@
   "How it works": {
     "How it works": "Come funziona"
   },
-  "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires at least one recorded minute per day. The dashboard keeps your work minutes and groups them by day, month or year.": {
-    "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires at least one recorded minute per day. The dashboard keeps your work minutes and groups them by day, month or year.": "Alterna sessioni di lavoro e pause brevi.\n\n• Pausa sospende il timer senza salvare.\n• Registra sessione salva i minuti interi e prepara un nuovo timer di lavoro.\n• Reset scarta la sessione corrente.\n• Le sessioni completate si salvano automaticamente.\n\nLa streak richiede almeno un minuto registrato al giorno. La dashboard conserva i minuti di lavoro e li raggruppa per giorno, mese o anno."
-  },
   "%1 min today": {
     "%1 min today": "%1 min oggi"
   },
@@ -364,5 +361,17 @@
   },
   "Daily focus target for the dashboard. Set 0 to disable. Default: 60.": {
     "Daily focus target for the dashboard. Set 0 to disable. Default: 60.": "Obiettivo giornaliero di lavoro per la dashboard. Imposta 0 per disattivarlo. Valore predefinito: 60."
+  },
+  "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires the minimum daily recorded work time configured above. The dashboard keeps your work minutes and groups them by day, month or year.": {
+    "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires the minimum daily recorded work time configured above. The dashboard keeps your work minutes and groups them by day, month or year.": "Alterna sessioni di lavoro e pause brevi.\n\n• Pausa sospende il timer senza salvare.\n• Registra sessione salva i minuti interi e prepara un nuovo timer di lavoro.\n• Reset scarta la sessione corrente.\n• Le sessioni completate si salvano automaticamente.\n\nLa streak richiede il tempo minimo di lavoro registrato al giorno configurato sopra. La dashboard conserva i minuti di lavoro e li raggruppa per giorno, mese o anno."
+  },
+  "Minimum time for a streak (minutes)": {
+    "Minimum time for a streak (minutes)": "Tempo minimo per una streak (minuti)"
+  },
+  "Minimum total recorded work per day to count toward a streak. Enter 1–1440 whole minutes. Default: 1.": {
+    "Minimum total recorded work per day to count toward a streak. Enter 1–1440 whole minutes. Default: 1.": "Tempo minimo totale di lavoro registrato al giorno per conteggiare una streak. Inserisci da 1 a 1440 minuti interi. Predefinito: 1."
+  },
+  "— vs last week": {
+    "— vs last week": "— rispetto alla settimana scorsa"
   }
 }

@@ -7,10 +7,12 @@ Rectangle {
     property string title: ""
     property string value: ""
     property string detail: ""
+    property bool comparisonBadge: false
+    property var comparisonChange: null
     property string iconName: ""
     property color accent: Theme.primary
     property bool compact: false
-    height: compact ? 80 : 124
+    height: compact ? 80 : Math.max(124, metricColumn.implicitHeight + 40)
     radius: Theme.cornerRadius
     color: compact ? Theme.surfaceContainerHighest : Theme.surfaceContainerHigh
     border.width: compact ? 0 : 1
@@ -20,6 +22,7 @@ Rectangle {
 
     Rectangle {
         id: iconTile
+        objectName: "statIcon"
         x: 16
         y: card.compact ? (parent.height - height) / 2 : 20
         width: card.compact ? 36 : 44
@@ -34,11 +37,14 @@ Rectangle {
         }
     }
     Column {
+        id: metricColumn
         x: iconTile.x + iconTile.width + 12
+        y: card.compact ? (card.height - implicitHeight) / 2 : iconTile.y
         width: parent.width - x - 16
-        anchors.verticalCenter: parent.verticalCenter
         spacing: 4
         StyledText {
+            id: valueText
+            objectName: "statValue"
             width: parent.width
             text: card.compact ? card.title : card.value
             color: card.compact ? Theme.surfaceVariantText : Theme.surfaceText
@@ -47,6 +53,8 @@ Rectangle {
             elide: Text.ElideRight
         }
         StyledText {
+            id: titleText
+            objectName: "statTitle"
             width: parent.width
             text: card.compact ? card.value : card.title
             color: Theme.surfaceText
@@ -55,13 +63,26 @@ Rectangle {
             wrapMode: card.compact ? Text.NoWrap : Text.WordWrap
             elide: Text.ElideRight
         }
-        StyledText {
-            width: parent.width
+        Rectangle {
+            objectName: "statComparison"
+            readonly property string text: card.detail
+            readonly property color comparisonColor: card.comparisonChange === null ? Theme.surfaceVariantText : card.comparisonChange < 0 ? "#b42318" : "#087f5b"
+            width: card.comparisonBadge ? Math.min(parent.width, comparisonText.implicitWidth + 16) : parent.width
+            height: comparisonText.implicitHeight + (card.comparisonBadge ? 8 : 0)
             visible: card.detail.length > 0
-            text: card.detail
-            color: Theme.surfaceVariantText
-            font.pixelSize: Theme.fontSizeSmall
-            elide: Text.ElideRight
+            radius: height / 2
+            color: !card.comparisonBadge ? "transparent" : card.comparisonChange === null ? Theme.surfaceContainerHighest : card.comparisonChange < 0 ? "#fee4e2" : "#dcfae6"
+            StyledText {
+                id: comparisonText
+                anchors.fill: parent
+                anchors.leftMargin: card.comparisonBadge ? 8 : 0
+                anchors.rightMargin: card.comparisonBadge ? 8 : 0
+                verticalAlignment: Text.AlignVCenter
+                text: (card.comparisonBadge && card.comparisonChange !== null ? (card.comparisonChange < 0 ? "↓ " : "↑ ") : "") + card.detail
+                color: card.comparisonBadge ? parent.comparisonColor : card.accent
+                font.pixelSize: Theme.fontSizeSmall
+                elide: Text.ElideRight
+            }
         }
     }
 }

@@ -36,6 +36,7 @@ PluginComponent {
     property var history: ({})
     property var sessionStats: Logic.Pomodoro.cleanSessionStats({})
     readonly property int dailyGoalMinutes: Logic.Pomodoro.dailyGoal(pluginData.dailyGoalMinutes)
+    readonly property int streakMinimumMinutes: Logic.Pomodoro.validDuration(pluginData.streakMinimumMinutes, 1)
     property var today: new Date()
     property alias dashboardVisible: dashboard.shouldBeVisible
     property alias grouping: dashboard.grouping
@@ -59,7 +60,7 @@ PluginComponent {
     }
     property string instanceId: Math.random().toString(36).substring(2)
     readonly property int todayMinutes: history[Logic.Pomodoro.dateKey(today)] || 0
-    readonly property int streakDays: Logic.Pomodoro.streak(history, today)
+    readonly property int streakDays: Logic.Pomodoro.streak(history, today, streakMinimumMinutes)
     readonly property int totalMinutes: Logic.Pomodoro.totalMinutes(history)
     readonly property var last7DaysData: Logic.Pomodoro.chart(history, today, "days", 0, 7)
     readonly property var dashboardData: dashboard.chartData
@@ -266,6 +267,7 @@ PluginComponent {
         sessionStats: root.sessionStats
         today: root.today
         dailyGoalMinutes: root.dailyGoalMinutes
+        streakMinimumMinutes: root.streakMinimumMinutes
         targetScreen: root.parentScreen
     }
     function getStateIcon() {

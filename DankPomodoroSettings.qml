@@ -131,6 +131,15 @@ PluginSettings {
                 defaultValue: "60"
             }
 
+            StringSetting {
+                objectName: "streakMinimumMinutesSetting"
+                settingKey: "streakMinimumMinutes"
+                label: I18n.trFor(root.pluginId, "Minimum time for a streak (minutes)")
+                description: I18n.trFor(root.pluginId, "Minimum total recorded work per day to count toward a streak. Enter 1–1440 whole minutes. Default: 1.")
+                placeholder: "1"
+                defaultValue: "1"
+            }
+
             ToggleSetting {
                 settingKey: "autoStartBreaks"
                 label: I18n.trFor(root.pluginId, "Auto-start breaks")
@@ -200,7 +209,7 @@ PluginSettings {
             }
 
             StyledText {
-                text: I18n.trFor(root.pluginId, "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires at least one recorded minute per day. The dashboard keeps your work minutes and groups them by day, month or year.")
+                text: I18n.trFor(root.pluginId, "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires the minimum daily recorded work time configured above. The dashboard keeps your work minutes and groups them by day, month or year.")
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.surfaceVariantText
                 wrapMode: Text.WordWrap

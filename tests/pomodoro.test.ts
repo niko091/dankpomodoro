@@ -69,6 +69,18 @@ test("one saved minute qualifies, yesterday's streak remains until a missed day"
     assert.equal(P.streak({}, new Date(start)), 0);
 });
 
+test("streak uses the daily minimum, preserves yesterday until today qualifies, and breaks on short days", () => {
+    const now = new Date("2026-11-07T12:00:00");
+    const history = { "2026-11-03": 60, "2026-11-04": 24, "2026-11-05": 25, "2026-11-06": 30, "2026-11-07": 10 };
+    assert.equal(P.streak(history, now, "25"), 2);
+    assert.equal(P.streak({ ...history, "2026-11-07": 25 }, now, 25), 3);
+    assert.equal(P.streak(history, now, 31), 0);
+    assert.equal(P.streak({}, now, 25), 0);
+    for (const invalid of [undefined, null, "", "bad", 0, -1, Infinity])
+        assert.equal(P.streak(history, now, invalid), 5);
+    assert.equal(P.streak({ "2026-11-07": 1440 }, now, 1440), 1);
+});
+
 test("work crossing midnight is attributed to the actual local dates", () => {
     const begin = at("2026-11-07T23:58:00");
     const result = P.finish(P.toggle(P.createTimer("work", 25), begin), {}, begin + 300000, 25);

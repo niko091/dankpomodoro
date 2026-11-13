@@ -79,7 +79,7 @@ namespace Pomodoro {
         return Object.keys(history).reduce((total, key) => total + (key >= begin && key <= end ? history[key] : 0), 0);
     }
 
-    export function dashboardSummary(history: History, stats: SessionStats, now: Date, goal: number) {
+    export function dashboardSummary(history: History, stats: SessionStats, now: Date, goal: number, streakMinimumMinutes = 1) {
         const today = dateKey(now);
         const start = monday(now);
         const previous = new Date(start);
@@ -88,6 +88,8 @@ namespace Pomodoro {
         previousEnd.setDate(previousEnd.getDate() - 1);
         const weekMinutes = sumPeriod(history, dateKey(start), today);
         const previousWeekMinutes = sumPeriod(history, dateKey(previous), dateKey(previousEnd));
+        const sessionsThisWeek = sumPeriod(stats.sessionsByDay, dateKey(start), today);
+        const previousWeekSessions = sumPeriod(stats.sessionsByDay, dateKey(previous), dateKey(previousEnd));
         const totalSessions = totalMinutes(stats.sessionsByDay);
         const trackedMinutes = totalMinutes(stats.minutesByDay);
         const weekdays = [0, 0, 0, 0, 0, 0, 0];
@@ -111,13 +113,14 @@ namespace Pomodoro {
             totalSessions,
             weekMinutes,
             previousWeekMinutes,
-            weekChange: previousWeekMinutes > 0 ? Math.round((weekMinutes - previousWeekMinutes) / previousWeekMinutes * 100) : null,
-            sessionsThisWeek: sumPeriod(stats.sessionsByDay, dateKey(start), today),
+            weekChange: previousWeekMinutes > 0 ? Math.round((weekMinutes - previousWeekMinutes) / previousWeekMinutes * 100) : weekMinutes === 0 ? 0 : null,
+            sessionsThisWeek,
+            sessionsWeekChange: previousWeekSessions > 0 ? Math.round((sessionsThisWeek - previousWeekSessions) / previousWeekSessions * 100) : null,
             averageMinutes: totalSessions > 0 ? Math.round(trackedMinutes / totalSessions * 10) / 10 : null,
             goalsHit,
             peakHour,
             bestWeekday: bestMinutes > 0 ? weekdays.indexOf(bestMinutes) : null,
-            streakDays: streak(history, now)
+            streakDays: streak(history, now, streakMinimumMinutes)
         };
     }
 
