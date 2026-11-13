@@ -57,6 +57,22 @@ TestCase {
         verify(createTemporaryObject(settingsFactory, testCase) !== null);
     }
 
+    function test_hostControlsBarAndDockSizing() {
+        const horizontal = createTemporaryObject(widget.horizontalBarPill, testCase);
+        const vertical = createTemporaryObject(widget.verticalBarPill, testCase);
+        for (const pill of [horizontal, vertical]) {
+            verify(pill !== null);
+            compare(findChild(pill, "barTimerIcon").size, 24);
+            compare(findChild(pill, "barTimerText").font.pixelSize, 14);
+        }
+        widget.iconSize = 32;
+        widget.textSize = 18;
+        for (const pill of [horizontal, vertical]) {
+            compare(findChild(pill, "barTimerIcon").size, 32);
+            compare(findChild(pill, "barTimerText").font.pixelSize, 18);
+        }
+    }
+
     function test_weeklyCardsAlignmentAndComparison() {
         widget.today = new Date(2026, 10, 7, 12);
         widget.history = { "2026-10-26": 100, "2026-11-02": 150 };

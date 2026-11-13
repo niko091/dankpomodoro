@@ -5,6 +5,8 @@ Item {
     property var pluginService: null
     property string pluginId: ""
     property real barThickness: 48
+    property int iconSize: 24
+    property int textSize: 14
     property var barConfig: null
     property real dpr: 1
     property real popoutWidth: 400

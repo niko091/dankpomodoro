@@ -304,19 +304,21 @@ PluginComponent {
             anchors.verticalCenter: parent.verticalCenter
 
             DIcon {
+                objectName: "barTimerIcon"
                 name: root.getStateIcon()
-                size: Theme.barIconSize(root.barThickness, undefined, root.barConfig?.maximizeWidgetIcons, root.barConfig?.iconScale)
+                size: root.iconSize
                 color: root.getStateColor()
                 anchors.verticalCenter: parent.verticalCenter
             }
 
             NumericText {
+                objectName: "barTimerText"
                 text: Logic.Pomodoro.formatTime(root.displayMs)
                 font.features: ({
                         "tnum": 1
                     })
                 isMonospace: false
-                font.pixelSize: Theme.barTextSize(root.barThickness, root.barConfig?.fontScale, root.barConfig?.maximizeWidgetText)
+                font.pixelSize: root.textSize
                 font.weight: Font.Medium
                 color: Theme.widgetTextColor
                 anchors.verticalCenter: parent.verticalCenter
@@ -331,8 +333,9 @@ PluginComponent {
             anchors.horizontalCenter: parent.horizontalCenter
 
             DIcon {
+                objectName: "barTimerIcon"
                 name: root.getStateIcon()
-                size: Theme.barIconSize(root.barThickness, undefined, root.barConfig?.maximizeWidgetIcons, root.barConfig?.iconScale)
+                size: root.iconSize
                 color: root.getStateColor()
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -343,12 +346,13 @@ PluginComponent {
                 spacing: 0
 
                 NumericText {
+                    objectName: "barTimerText"
                     text: String(Math.floor(Math.ceil(root.displayMs / 1000) / 60)).padStart(2, "0")
                     font.features: ({
                             "tnum": 1
                         })
                     isMonospace: false
-                    font.pixelSize: Theme.barTextSize(root.barThickness, root.barConfig?.fontScale, root.barConfig?.maximizeWidgetText)
+                    font.pixelSize: root.textSize
                     font.weight: Font.Medium
                     color: Theme.widgetTextColor
                     horizontalAlignment: Text.AlignHCenter
@@ -356,12 +360,13 @@ PluginComponent {
                 }
 
                 NumericText {
+                    objectName: "barTimerText"
                     text: String(Math.ceil(root.displayMs / 1000) % 60).padStart(2, "0")
                     font.features: ({
                             "tnum": 1
                         })
                     isMonospace: false
-                    font.pixelSize: Theme.barTextSize(root.barThickness, root.barConfig?.fontScale, root.barConfig?.maximizeWidgetText)
+                    font.pixelSize: root.textSize
                     font.weight: Font.Medium
                     color: Theme.widgetTextColor
                     horizontalAlignment: Text.AlignHCenter
