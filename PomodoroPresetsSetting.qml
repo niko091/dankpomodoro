@@ -74,19 +74,19 @@ Column {
         spacing: Theme.spacingS
         StyledText {
             width: editor.fieldWidth
-            text: I18n.trFor(editor.pluginId, "Work")
+            text: I18n.trFor("dankPomodoroTimerPlusPlus", "Work")
             font.pixelSize: Theme.fontSizeSmall
             color: Theme.surfaceVariantText
         }
         StyledText {
             width: editor.fieldWidth
-            text: I18n.trFor(editor.pluginId, "Short break")
+            text: I18n.trFor("dankPomodoroTimerPlusPlus", "Short break")
             font.pixelSize: Theme.fontSizeSmall
             color: Theme.surfaceVariantText
         }
         StyledText {
             width: editor.fieldWidth
-            text: I18n.trFor(editor.pluginId, "Long break")
+            text: I18n.trFor("dankPomodoroTimerPlusPlus", "Long break")
             font.pixelSize: Theme.fontSizeSmall
             color: Theme.surfaceVariantText
         }
@@ -110,7 +110,7 @@ Column {
                     bottom: 1
                     top: 1440
                 }
-                Accessible.name: I18n.trFor(editor.pluginId, "Work (minutes)")
+                Accessible.name: I18n.trFor("dankPomodoroTimerPlusPlus", "Work (minutes)")
                 onEditingFinished: editor.editProfile(index, "workMinutes", text)
             }
             DTextField {
@@ -121,7 +121,7 @@ Column {
                     bottom: 1
                     top: 1440
                 }
-                Accessible.name: I18n.trFor(editor.pluginId, "Short break (minutes)")
+                Accessible.name: I18n.trFor("dankPomodoroTimerPlusPlus", "Short break (minutes)")
                 onEditingFinished: editor.editProfile(index, "breakMinutes", text)
             }
             DTextField {
@@ -132,7 +132,7 @@ Column {
                     bottom: 1
                     top: 1440
                 }
-                Accessible.name: I18n.trFor(editor.pluginId, "Long break (minutes)")
+                Accessible.name: I18n.trFor("dankPomodoroTimerPlusPlus", "Long break (minutes)")
                 onEditingFinished: editor.editProfile(index, "longBreakMinutes", text)
             }
             PomodoroIconButton {
@@ -141,7 +141,7 @@ Column {
                 iconSize: 18
                 anchors.verticalCenter: parent.verticalCenter
                 iconName: "remove"
-                tooltipText: I18n.trFor(editor.pluginId, "Remove timer")
+                tooltipText: I18n.trFor("dankPomodoroTimerPlusPlus", "Remove timer")
                 enabled: editor.profiles.length > 1
                 onClicked: editor.removeProfile(index)
             }
@@ -153,7 +153,7 @@ Column {
         controlSize: 32
         iconSize: 20
         iconName: "add"
-        tooltipText: I18n.trFor(editor.pluginId, "Add timer")
+        tooltipText: I18n.trFor("dankPomodoroTimerPlusPlus", "Add timer")
         onClicked: editor.addProfile()
     }
 }

@@ -6,7 +6,7 @@ import "Pomodoro.js" as Logic
 Row {
     id: chart
     property string translationPluginId: "dankPomodoroTimerPlusPlus"
-    readonly property var monthLabels: [I18n.trFor(chart.translationPluginId, "Jan"), I18n.trFor(chart.translationPluginId, "Feb"), I18n.trFor(chart.translationPluginId, "Mar"), I18n.trFor(chart.translationPluginId, "Apr"), I18n.trFor(chart.translationPluginId, "May"), I18n.trFor(chart.translationPluginId, "Jun"), I18n.trFor(chart.translationPluginId, "Jul"), I18n.trFor(chart.translationPluginId, "Aug"), I18n.trFor(chart.translationPluginId, "Sep"), I18n.trFor(chart.translationPluginId, "Oct"), I18n.trFor(chart.translationPluginId, "Nov"), I18n.trFor(chart.translationPluginId, "Dec")]
+    readonly property var monthLabels: [I18n.trFor("dankPomodoroTimerPlusPlus", "Jan"), I18n.trFor("dankPomodoroTimerPlusPlus", "Feb"), I18n.trFor("dankPomodoroTimerPlusPlus", "Mar"), I18n.trFor("dankPomodoroTimerPlusPlus", "Apr"), I18n.trFor("dankPomodoroTimerPlusPlus", "May"), I18n.trFor("dankPomodoroTimerPlusPlus", "Jun"), I18n.trFor("dankPomodoroTimerPlusPlus", "Jul"), I18n.trFor("dankPomodoroTimerPlusPlus", "Aug"), I18n.trFor("dankPomodoroTimerPlusPlus", "Sep"), I18n.trFor("dankPomodoroTimerPlusPlus", "Oct"), I18n.trFor("dankPomodoroTimerPlusPlus", "Nov"), I18n.trFor("dankPomodoroTimerPlusPlus", "Dec")]
     property var bars: []
     readonly property real maximum: Logic.Pomodoro.maxMinutes(bars)
     height: 120
@@ -18,7 +18,7 @@ Row {
             width: (chart.width - chart.spacing * Math.max(0, chart.bars.length - 1)) / Math.max(1, chart.bars.length)
             height: chart.height
             Accessible.role: Accessible.StaticText
-            Accessible.name: modelData.minutes === 1 ? I18n.trFor(chart.translationPluginId, "%1: 1 minute").arg(modelData.key) : I18n.trFor(chart.translationPluginId, "%1: %2 minutes").arg(modelData.key).arg(modelData.minutes)
+            Accessible.name: modelData.minutes === 1 ? I18n.trFor("dankPomodoroTimerPlusPlus", "%1: 1 minute").arg(modelData.key) : I18n.trFor("dankPomodoroTimerPlusPlus", "%1: %2 minutes").arg(modelData.key).arg(modelData.minutes)
             StyledText {
                 width: parent.width
                 text: modelData.minutes > 0 ? modelData.minutes : ""

@@ -9,14 +9,14 @@ Item {
     property var bars: []
     property color barColor: Theme.primary
     property color labelColor: Theme.surfaceVariantText
-    readonly property var weekdays: [I18n.trFor(pluginId, "Sunday"), I18n.trFor(pluginId, "Monday"), I18n.trFor(pluginId, "Tuesday"), I18n.trFor(pluginId, "Wednesday"), I18n.trFor(pluginId, "Thursday"), I18n.trFor(pluginId, "Friday"), I18n.trFor(pluginId, "Saturday")]
-    readonly property var months: [I18n.trFor(pluginId, "Jan"), I18n.trFor(pluginId, "Feb"), I18n.trFor(pluginId, "Mar"), I18n.trFor(pluginId, "Apr"), I18n.trFor(pluginId, "May"), I18n.trFor(pluginId, "Jun"), I18n.trFor(pluginId, "Jul"), I18n.trFor(pluginId, "Aug"), I18n.trFor(pluginId, "Sep"), I18n.trFor(pluginId, "Oct"), I18n.trFor(pluginId, "Nov"), I18n.trFor(pluginId, "Dec")]
+    readonly property var weekdays: [I18n.trFor("dankPomodoroTimerPlusPlus", "Sunday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Monday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Tuesday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Wednesday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Thursday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Friday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Saturday")]
+    readonly property var months: [I18n.trFor("dankPomodoroTimerPlusPlus", "Jan"), I18n.trFor("dankPomodoroTimerPlusPlus", "Feb"), I18n.trFor("dankPomodoroTimerPlusPlus", "Mar"), I18n.trFor("dankPomodoroTimerPlusPlus", "Apr"), I18n.trFor("dankPomodoroTimerPlusPlus", "May"), I18n.trFor("dankPomodoroTimerPlusPlus", "Jun"), I18n.trFor("dankPomodoroTimerPlusPlus", "Jul"), I18n.trFor("dankPomodoroTimerPlusPlus", "Aug"), I18n.trFor("dankPomodoroTimerPlusPlus", "Sep"), I18n.trFor("dankPomodoroTimerPlusPlus", "Oct"), I18n.trFor("dankPomodoroTimerPlusPlus", "Nov"), I18n.trFor("dankPomodoroTimerPlusPlus", "Dec")]
     readonly property real maximum: Math.max(5, Math.ceil(Logic.Pomodoro.maxMinutes(bars) / 5) * 5)
     readonly property real plotWidth: Math.max(1, width - 62)
     readonly property real plotHeight: Math.max(1, height - 68)
     property int hoveredIndex: -1
     Accessible.role: Accessible.Chart
-    Accessible.name: I18n.trFor(pluginId, "Work minutes by period")
+    Accessible.name: I18n.trFor("dankPomodoroTimerPlusPlus", "Work minutes by period")
 
     function labelFor(bar) {
         if (bar.weekdayIndex !== undefined)
@@ -96,7 +96,7 @@ Item {
             anchors.centerIn: parent
             text: {
                 const bar = chart.bars[chart.hoveredIndex];
-                return bar ? I18n.trFor(chart.pluginId, "%1: %2 min").arg(bar.weekdayIndex !== undefined ? chart.labelFor(bar) : bar.key).arg(bar.minutes) : "";
+                return bar ? I18n.trFor("dankPomodoroTimerPlusPlus", "%1: %2 min").arg(bar.weekdayIndex !== undefined ? chart.labelFor(bar) : bar.key).arg(bar.minutes) : "";
             }
             color: Theme.surfaceText
             font.pixelSize: Theme.fontSizeSmall

@@ -17,20 +17,20 @@ DModal {
     property string grouping: "days"
     property int chartPage: 0
     property real preferredContentHeight: SettingsMetrics.windowHeight
-    readonly property string windowTitle: I18n.trFor(pluginId, "Pomodoro Dashboard")
+    readonly property string windowTitle: I18n.trFor("dankPomodoroTimerPlusPlus", "Pomodoro Dashboard")
     readonly property var summary: Logic.Pomodoro.dashboardSummary(history, sessionStats, today, dailyGoalMinutes, streakMinimumMinutes)
     readonly property var chartData: Logic.Pomodoro.dashboardChart(history, today, grouping, chartPage)
     readonly property bool canGoBack: Logic.Pomodoro.dashboardHasEarlier(history, chartData, grouping)
-    readonly property var weekdayNames: [I18n.trFor(pluginId, "Sunday"), I18n.trFor(pluginId, "Monday"), I18n.trFor(pluginId, "Tuesday"), I18n.trFor(pluginId, "Wednesday"), I18n.trFor(pluginId, "Thursday"), I18n.trFor(pluginId, "Friday"), I18n.trFor(pluginId, "Saturday")]
+    readonly property var weekdayNames: [I18n.trFor("dankPomodoroTimerPlusPlus", "Sunday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Monday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Tuesday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Wednesday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Thursday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Friday"), I18n.trFor("dankPomodoroTimerPlusPlus", "Saturday")]
     onGroupingChanged: chartPage = 0
     function daysLabel(days) {
-        return (days === 1 ? I18n.trFor(pluginId, "%1 day") : I18n.trFor(pluginId, "%1 days")).arg(days);
+        return (days === 1 ? I18n.trFor("dankPomodoroTimerPlusPlus", "%1 day") : I18n.trFor("dankPomodoroTimerPlusPlus", "%1 days")).arg(days);
     }
     function sessionsLabel(count) {
-        return (count === 1 ? I18n.trFor(pluginId, "%1 recorded session") : I18n.trFor(pluginId, "%1 recorded sessions")).arg(count);
+        return (count === 1 ? I18n.trFor("dankPomodoroTimerPlusPlus", "%1 recorded session") : I18n.trFor("dankPomodoroTimerPlusPlus", "%1 recorded sessions")).arg(count);
     }
     function weekComparison(change) {
-        return change === null ? "" : I18n.trFor(dashboard.pluginId, "%1% vs last week").arg((change > 0 ? "+" : "") + change);
+        return change === null ? "" : I18n.trFor("dankPomodoroTimerPlusPlus", "%1% vs last week").arg((change > 0 ? "+" : "") + change);
     }
     positioning: "center"
     modalWidth: Math.min(SettingsMetrics.windowWidth, Math.max(320, screenWidth - Theme.spacingL * 2))
@@ -69,7 +69,7 @@ DModal {
                     anchors.verticalCenter: parent.verticalCenter
                     controlSize: 36
                     iconName: "close"
-                    tooltipText: I18n.trFor(dashboard.pluginId, "Close")
+                    tooltipText: I18n.trFor("dankPomodoroTimerPlusPlus", "Close")
                     onClicked: dashboard.close()
                 }
             }
@@ -98,18 +98,18 @@ DModal {
                             objectName: "weeklyMinutesCard"
                             width: parent.cardWidth
                             iconName: "schedule"
-                            title: I18n.trFor(dashboard.pluginId, "Minutes this week")
+                            title: I18n.trFor("dankPomodoroTimerPlusPlus", "Minutes this week")
                             value: String(dashboard.summary.weekMinutes)
                             comparisonBadge: true
                             comparisonChange: dashboard.summary.weekChange
-                            detail: comparisonChange === null ? I18n.trFor(dashboard.pluginId, "— vs last week") : dashboard.weekComparison(comparisonChange)
+                            detail: comparisonChange === null ? I18n.trFor("dankPomodoroTimerPlusPlus", "— vs last week") : dashboard.weekComparison(comparisonChange)
                         }
                         DashboardStatCard {
                             objectName: "weeklySessionsCard"
                             width: parent.cardWidth
                             iconName: "stacks"
                             accent: Theme.secondary
-                            title: I18n.trFor(dashboard.pluginId, "Sessions this week")
+                            title: I18n.trFor("dankPomodoroTimerPlusPlus", "Sessions this week")
                             value: dashboard.sessionStats.trackingSince ? String(dashboard.summary.sessionsThisWeek) : "—"
                             detail: dashboard.weekComparison(dashboard.summary.sessionsWeekChange)
                         }
@@ -118,15 +118,15 @@ DModal {
                             iconName: "hourglass_top"
                             objectName: "averageSessionCard"
                             accent: Theme.info
-                            title: I18n.trFor(dashboard.pluginId, "Average session length")
-                            value: dashboard.summary.averageMinutes !== null ? I18n.trFor(dashboard.pluginId, "%1 min").arg(dashboard.summary.averageMinutes) : "—"
+                            title: I18n.trFor("dankPomodoroTimerPlusPlus", "Average session length")
+                            value: dashboard.summary.averageMinutes !== null ? I18n.trFor("dankPomodoroTimerPlusPlus", "%1 min").arg(dashboard.summary.averageMinutes) : "—"
                         }
                         DashboardStatCard {
                             width: parent.cardWidth
                             iconName: "target"
                             objectName: "monthlyGoalsCard"
                             accent: Theme.warning
-                            title: I18n.trFor(dashboard.pluginId, "Goals hit this month")
+                            title: I18n.trFor("dankPomodoroTimerPlusPlus", "Goals hit this month")
                             value: dashboard.dailyGoalMinutes > 0 ? dashboard.daysLabel(dashboard.summary.goalsHit) : "—"
                         }
                     }
@@ -149,7 +149,7 @@ DModal {
                                     color: Theme.warning
                                 }
                                 StyledText {
-                                    text: I18n.trFor(dashboard.pluginId, "Productivity insights")
+                                    text: I18n.trFor("dankPomodoroTimerPlusPlus", "Productivity insights")
                                     color: Theme.surfaceText
                                     font.pixelSize: Theme.fontSizeMedium
                                     font.weight: Font.DemiBold
@@ -163,21 +163,21 @@ DModal {
                                 DashboardStatCard {
                                     compact: true
                                     width: parent.cardWidth
-                                    title: I18n.trFor(dashboard.pluginId, "Peak hour")
+                                    title: I18n.trFor("dankPomodoroTimerPlusPlus", "Peak hour")
                                     value: dashboard.summary.peakHour !== null ? String(dashboard.summary.peakHour).padStart(2, "0") + ":00" : "—"
                                     iconName: "schedule"
                                 }
                                 DashboardStatCard {
                                     compact: true
                                     width: parent.cardWidth
-                                    title: I18n.trFor(dashboard.pluginId, "Best day")
+                                    title: I18n.trFor("dankPomodoroTimerPlusPlus", "Best day")
                                     value: dashboard.summary.bestWeekday !== null ? dashboard.weekdayNames[dashboard.summary.bestWeekday] : "—"
                                     iconName: "event_available"
                                 }
                                 DashboardStatCard {
                                     compact: true
                                     width: parent.cardWidth
-                                    title: I18n.trFor(dashboard.pluginId, "Current streak")
+                                    title: I18n.trFor("dankPomodoroTimerPlusPlus", "Current streak")
                                     value: dashboard.daysLabel(dashboard.summary.streakDays)
                                     iconName: "local_fire_department"
                                 }
@@ -200,7 +200,7 @@ DModal {
                                 spacing: 8
                                 StyledText {
                                     height: 32
-                                    text: I18n.trFor(dashboard.pluginId, "Focus time breakdown")
+                                    text: I18n.trFor("dankPomodoroTimerPlusPlus", "Focus time breakdown")
                                     color: Theme.surfaceText
                                     font.pixelSize: Theme.fontSizeMedium
                                     font.weight: Font.DemiBold
@@ -210,23 +210,23 @@ DModal {
                                     model: [
                                         {
                                             key: "days",
-                                            text: I18n.trFor(dashboard.pluginId, "Days")
+                                            text: I18n.trFor("dankPomodoroTimerPlusPlus", "Days")
                                         },
                                         {
                                             key: "weeks",
-                                            text: I18n.trFor(dashboard.pluginId, "Weeks")
+                                            text: I18n.trFor("dankPomodoroTimerPlusPlus", "Weeks")
                                         },
                                         {
                                             key: "months",
-                                            text: I18n.trFor(dashboard.pluginId, "Months")
+                                            text: I18n.trFor("dankPomodoroTimerPlusPlus", "Months")
                                         },
                                         {
                                             key: "years",
-                                            text: I18n.trFor(dashboard.pluginId, "Years")
+                                            text: I18n.trFor("dankPomodoroTimerPlusPlus", "Years")
                                         },
                                         {
                                             key: "weekday",
-                                            text: I18n.trFor(dashboard.pluginId, "Weekday")
+                                            text: I18n.trFor("dankPomodoroTimerPlusPlus", "Weekday")
                                         }
                                     ]
                                     DButton {
@@ -255,7 +255,7 @@ DModal {
                                 DButton {
                                     id: previousButton
                                     visible: dashboard.grouping === "years"
-                                    text: I18n.trFor(dashboard.pluginId, "Previous")
+                                    text: I18n.trFor("dankPomodoroTimerPlusPlus", "Previous")
                                     iconName: "chevron_left"
                                     variant: "text"
                                     buttonHeight: 32
@@ -268,7 +268,7 @@ DModal {
                                 DButton {
                                     id: nextButton
                                     visible: dashboard.grouping === "years"
-                                    text: I18n.trFor(dashboard.pluginId, "Next")
+                                    text: I18n.trFor("dankPomodoroTimerPlusPlus", "Next")
                                     iconName: "chevron_right"
                                     variant: "text"
                                     buttonHeight: 32
@@ -291,13 +291,13 @@ DModal {
                             spacing: 24
                             StyledText {
                                 id: totalHours
-                                text: I18n.trFor(dashboard.pluginId, "%1 total hours").arg((dashboard.summary.totalMinutes / 60).toFixed(1))
+                                text: I18n.trFor("dankPomodoroTimerPlusPlus", "%1 total hours").arg((dashboard.summary.totalMinutes / 60).toFixed(1))
                                 color: Theme.surfaceText
                                 font.pixelSize: Theme.fontSizeMedium
                             }
                             StyledText {
                                 id: totalMinutes
-                                text: I18n.trFor(dashboard.pluginId, "%1 total minutes").arg(dashboard.summary.totalMinutes)
+                                text: I18n.trFor("dankPomodoroTimerPlusPlus", "%1 total minutes").arg(dashboard.summary.totalMinutes)
                                 color: Theme.surfaceText
                                 font.pixelSize: Theme.fontSizeMedium
                             }

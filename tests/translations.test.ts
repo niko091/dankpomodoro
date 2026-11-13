@@ -9,6 +9,8 @@ const files = ["DankPomodoroWidget.qml", "DankPomodoroSettings.qml", "MinuteChar
 test("Italian catalog covers every DMS translation call and preserves placeholders", () => {
     const terms = new Set<string>();
     for (const file of files) {
+        for (const match of read(file).matchAll(/I18n\.trFor\(([^,]+),/g))
+            assert.equal(match[1], '"dankPomodoroTimerPlusPlus"', file + ": translation extraction requires a literal plugin id");
         for (const match of read(file).matchAll(/I18n\.trFor\([^,]+,\s*("(?:\\.|[^"\\])*")/g))
             terms.add(JSON.parse(match[1]));
     }

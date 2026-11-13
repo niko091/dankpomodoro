@@ -13,7 +13,7 @@ PluginSettings {
     StyledText {
         objectName: "settingsTitle"
         width: parent.width
-        text: I18n.trFor(root.pluginId, "Pomodoro++ Settings")
+        text: I18n.trFor("dankPomodoroTimerPlusPlus", "Pomodoro++ Settings")
         font.pixelSize: Theme.fontSizeLarge
         font.weight: Font.Bold
         color: Theme.surfaceText
@@ -21,7 +21,7 @@ PluginSettings {
 
     StyledText {
         width: parent.width
-        text: I18n.trFor(root.pluginId, "Configure timer durations and behavior")
+        text: I18n.trFor("dankPomodoroTimerPlusPlus", "Configure timer durations and behavior")
         font.pixelSize: Theme.fontSizeSmall
         color: Theme.surfaceVariantText
         wrapMode: Text.WordWrap
@@ -40,7 +40,7 @@ PluginSettings {
             spacing: Theme.spacingM
 
             StyledText {
-                text: I18n.trFor(root.pluginId, "Pomodoro timers")
+                text: I18n.trFor("dankPomodoroTimerPlusPlus", "Pomodoro timers")
                 font.pixelSize: Theme.fontSizeMedium
                 font.weight: Font.Medium
                 color: Theme.surfaceText
@@ -65,33 +65,33 @@ PluginSettings {
             anchors.margins: Theme.spacingL
             spacing: Theme.spacingM
             StyledText {
-                text: I18n.trFor(root.pluginId, "Quick Actions")
+                text: I18n.trFor("dankPomodoroTimerPlusPlus", "Quick Actions")
                 font.pixelSize: Theme.fontSizeMedium
                 font.weight: Font.Medium
                 color: Theme.surfaceText
             }
             ToggleSetting {
                 settingKey: "showWorkAction"
-                label: I18n.trFor(root.pluginId, "Work")
-                description: I18n.trFor(root.pluginId, "Show the work quick action")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Work")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Show the work quick action")
                 defaultValue: true
             }
             ToggleSetting {
                 settingKey: "showShortBreakAction"
-                label: I18n.trFor(root.pluginId, "Short break")
-                description: I18n.trFor(root.pluginId, "Show the short break quick action")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Short break")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Show the short break quick action")
                 defaultValue: true
             }
             ToggleSetting {
                 settingKey: "showLongBreakAction"
-                label: I18n.trFor(root.pluginId, "Long break")
-                description: I18n.trFor(root.pluginId, "Show the optional long break quick action")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Long break")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Show the optional long break quick action")
                 defaultValue: false
             }
             ToggleSetting {
                 settingKey: "showDashboardAction"
-                label: I18n.trFor(root.pluginId, "Dashboard")
-                description: I18n.trFor(root.pluginId, "Show the dashboard quick action")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Dashboard")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Show the dashboard quick action")
                 defaultValue: true
             }
         }
@@ -110,7 +110,7 @@ PluginSettings {
             spacing: Theme.spacingM
 
             StyledText {
-                text: I18n.trFor(root.pluginId, "Behavior")
+                text: I18n.trFor("dankPomodoroTimerPlusPlus", "Behavior")
                 font.pixelSize: Theme.fontSizeMedium
                 font.weight: Font.Medium
                 color: Theme.surfaceText
@@ -118,15 +118,15 @@ PluginSettings {
 
             ToggleSetting {
                 settingKey: "showStopwatch"
-                label: I18n.trFor(root.pluginId, "Show Stopwatch")
-                description: I18n.trFor(root.pluginId, "Show Stopwatch in the timer menu")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Show Stopwatch")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Show Stopwatch in the timer menu")
                 defaultValue: true
             }
 
             StringSetting {
                 settingKey: "dailyGoalMinutes"
-                label: I18n.trFor(root.pluginId, "Daily goal (minutes)")
-                description: I18n.trFor(root.pluginId, "Daily focus target for the dashboard. Set 0 to disable. Default: 60.")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Daily goal (minutes)")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Daily focus target for the dashboard. Set 0 to disable. Default: 60.")
                 placeholder: "60"
                 defaultValue: "60"
             }
@@ -134,44 +134,44 @@ PluginSettings {
             StringSetting {
                 objectName: "streakMinimumMinutesSetting"
                 settingKey: "streakMinimumMinutes"
-                label: I18n.trFor(root.pluginId, "Minimum time for a streak (minutes)")
-                description: I18n.trFor(root.pluginId, "Minimum total recorded work per day to count toward a streak. Enter 1–1440 whole minutes. Default: 1.")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Minimum time for a streak (minutes)")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Minimum total recorded work per day to count toward a streak. Enter 1–1440 whole minutes. Default: 1.")
                 placeholder: "1"
                 defaultValue: "1"
             }
 
             ToggleSetting {
                 settingKey: "autoStartBreaks"
-                label: I18n.trFor(root.pluginId, "Auto-start breaks")
-                description: I18n.trFor(root.pluginId, "Start the short break when work finishes")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Auto-start breaks")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Start the short break when work finishes")
                 defaultValue: false
             }
 
             ToggleSetting {
                 settingKey: "autoStartPomodoros"
-                label: I18n.trFor(root.pluginId, "Auto-start work")
-                description: I18n.trFor(root.pluginId, "Start a work session when the break finishes")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Auto-start work")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Start a work session when the break finishes")
                 defaultValue: false
             }
 
             ToggleSetting {
                 settingKey: "autoSetDND"
-                label: I18n.trFor(root.pluginId, "Do Not Disturb during work")
-                description: I18n.trFor(root.pluginId, "Enable Do Not Disturb during work sessions")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Do Not Disturb during work")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Enable Do Not Disturb during work sessions")
                 defaultValue: false
             }
 
             ToggleSetting {
                 settingKey: "showBarText"
-                label: I18n.trFor(root.pluginId, "Show timer text in the bar")
-                description: I18n.trFor(root.pluginId, "Show the remaining time next to the icon")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Show timer text in the bar")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Show the remaining time next to the icon")
                 defaultValue: true
             }
 
             ToggleSetting {
                 settingKey: "playCompletionSound"
-                label: I18n.trFor(root.pluginId, "Completion sound")
-                description: I18n.trFor(root.pluginId, "Play a sound when work or a break finishes")
+                label: I18n.trFor("dankPomodoroTimerPlusPlus", "Completion sound")
+                description: I18n.trFor("dankPomodoroTimerPlusPlus", "Play a sound when work or a break finishes")
                 defaultValue: true
             }
         }
@@ -200,7 +200,7 @@ PluginSettings {
                 }
 
                 StyledText {
-                    text: I18n.trFor(root.pluginId, "How it works")
+                    text: I18n.trFor("dankPomodoroTimerPlusPlus", "How it works")
                     font.pixelSize: Theme.fontSizeMedium
                     font.weight: Font.Medium
                     color: Theme.surfaceText
@@ -209,7 +209,7 @@ PluginSettings {
             }
 
             StyledText {
-                text: I18n.trFor(root.pluginId, "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires the minimum daily recorded work time configured above. The dashboard keeps your work minutes and groups them by day, month or year.")
+                text: I18n.trFor("dankPomodoroTimerPlusPlus", "Alternate work sessions and short breaks.\n\n• Pause suspends the timer without saving.\n• Record session saves whole minutes and prepares a new work timer.\n• Reset discards the current session.\n• Completed work sessions are saved automatically.\n\nA streak requires the minimum daily recorded work time configured above. The dashboard keeps your work minutes and groups them by day, month or year.")
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.surfaceVariantText
                 wrapMode: Text.WordWrap

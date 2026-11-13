@@ -18,7 +18,7 @@ PluginComponent {
     readonly property bool showStopwatch: pluginData.showStopwatch ?? true
     readonly property string workMode: showStopwatch && selectedPresetKey === "stopwatch" ? "stopwatch" : "work"
     readonly property string selectedTimerKey: workMode === "stopwatch" ? "stopwatch" : activePreset.key
-    readonly property string selectedTimerLabel: workMode === "stopwatch" ? I18n.trFor(root.pluginId, "Stopwatch") : activePreset.key
+    readonly property string selectedTimerLabel: workMode === "stopwatch" ? I18n.trFor("dankPomodoroTimerPlusPlus", "Stopwatch") : activePreset.key
     readonly property int workDuration: activePreset.workMinutes
     readonly property int shortBreakDuration: activePreset.breakMinutes
     readonly property int longBreakDuration: activePreset.longBreakMinutes
@@ -47,13 +47,13 @@ PluginComponent {
     readonly property string sessionMessage: {
         switch (sessionMessageKind) {
         case "switchMode":
-            return I18n.trFor(root.pluginId, "Record or reset the session before switching modes.");
+            return I18n.trFor("dankPomodoroTimerPlusPlus", "Record or reset the session before switching modes.");
         case "reset":
-            return I18n.trFor(root.pluginId, "Session reset");
+            return I18n.trFor("dankPomodoroTimerPlusPlus", "Session reset");
         case "saved":
-            return I18n.trFor(root.pluginId, "Session recorded: %1 min").arg(recordedMinutes);
+            return I18n.trFor("dankPomodoroTimerPlusPlus", "Session recorded: %1 min").arg(recordedMinutes);
         case "tooShort":
-            return I18n.trFor(root.pluginId, "Session shorter than one minute: 0 min saved");
+            return I18n.trFor("dankPomodoroTimerPlusPlus", "Session shorter than one minute: 0 min saved");
         default:
             return "";
         }
@@ -226,7 +226,7 @@ PluginComponent {
 
     function registerSession() {
         if (!pluginService || !root.isWorkSession)
-            return I18n.trFor(root.pluginId, "No work session to record");
+            return I18n.trFor("dankPomodoroTimerPlusPlus", "No work session to record");
         const minutes = saveWork();
         recordedMinutes = minutes;
         sessionMessageKind = minutes > 0 ? "saved" : "tooShort";
@@ -246,7 +246,7 @@ PluginComponent {
         }
         if (playCompletionSound && SettingsData.soundsEnabled)
             AudioService.playNormalNotificationSound();
-        Quickshell.execDetached(["dms", "notify", "--urgency", "normal", wasWork ? I18n.trFor(root.pluginId, "Pomodoro complete") : I18n.trFor(root.pluginId, "Break complete"), wasWork ? I18n.trFor(root.pluginId, "Time for a short break.") : I18n.trFor(root.pluginId, "Ready for another session?")]);
+        Quickshell.execDetached(["dms", "notify", "--urgency", "normal", wasWork ? I18n.trFor("dankPomodoroTimerPlusPlus", "Pomodoro complete") : I18n.trFor("dankPomodoroTimerPlusPlus", "Break complete"), wasWork ? I18n.trFor("dankPomodoroTimerPlusPlus", "Time for a short break.") : I18n.trFor("dankPomodoroTimerPlusPlus", "Ready for another session?")]);
         selectMode(wasWork ? "shortBreak" : "work", wasWork ? autoStartBreaks : autoStartPomodoros);
     }
 
@@ -282,7 +282,7 @@ PluginComponent {
         }
         function toggleTimer(): string {
             root.toggleTimer();
-            return root.timer.running ? I18n.trFor(root.pluginId, "Timer is running") : I18n.trFor(root.pluginId, "Timer is paused");
+            return root.timer.running ? I18n.trFor("dankPomodoroTimerPlusPlus", "Timer is running") : I18n.trFor("dankPomodoroTimerPlusPlus", "Timer is paused");
         }
         function registerSession(): string {
             return root.registerSession();
@@ -373,8 +373,8 @@ PluginComponent {
 
     popoutContent: Component {
         PopoutComponent {
-            headerText: "Pomodoro Timer++"
-            detailsText: I18n.trFor(root.pluginId, "%1 min today").arg(root.todayMinutes) + "  •  " + (root.streakDays === 1 ? I18n.trFor(root.pluginId, "Streak: 1 day") : I18n.trFor(root.pluginId, "Streak: %1 days").arg(root.streakDays)) + "  •  " + root.selectedTimerLabel
+            headerText: I18n.trFor("dankPomodoroTimerPlusPlus", "Pomodoro Timer++")
+            detailsText: I18n.trFor("dankPomodoroTimerPlusPlus", "%1 min today").arg(root.todayMinutes) + "  •  " + (root.streakDays === 1 ? I18n.trFor("dankPomodoroTimerPlusPlus", "Streak: 1 day") : I18n.trFor("dankPomodoroTimerPlusPlus", "Streak: %1 days").arg(root.streakDays)) + "  •  " + root.selectedTimerLabel
             headerActions: Component {
                 Item {
                     width: 32
@@ -385,8 +385,8 @@ PluginComponent {
                         controlSize: 32
                         iconSize: 20
                         iconName: "tune"
-                        tooltipText: I18n.trFor(root.pluginId, "Choose Pomodoro timer")
-                        Accessible.name: I18n.trFor(root.pluginId, "Choose Pomodoro timer")
+                        tooltipText: I18n.trFor("dankPomodoroTimerPlusPlus", "Choose Pomodoro timer")
+                        Accessible.name: I18n.trFor("dankPomodoroTimerPlusPlus", "Choose Pomodoro timer")
                         onClicked: {
                             presetMenu.currentValue = root.selectedTimerKey;
                             presetMenu.openDropdownMenu();
@@ -401,7 +401,7 @@ PluginComponent {
                         alignPopupRight: true
                         dropdownWidth: 160
                         currentValue: root.selectedTimerKey
-                        options: root.timerPresets.map(preset => preset.key).concat(root.showStopwatch ? [I18n.trFor(root.pluginId, "Stopwatch")] : [])
+                        options: root.timerPresets.map(preset => preset.key).concat(root.showStopwatch ? [I18n.trFor("dankPomodoroTimerPlusPlus", "Stopwatch")] : [])
                         optionValues: root.timerPresets.map(preset => preset.key).concat(root.showStopwatch ? ["stopwatch"] : [])
                         onValueChanged: value => root.selectPreset(value)
                     }
@@ -457,7 +457,7 @@ PluginComponent {
                                     anchors.horizontalCenter: parent.horizontalCenter
                                 }
                                 StyledText {
-                                    text: root.timer.mode === "stopwatch" ? I18n.trFor(root.pluginId, "Stopwatch") : root.timer.mode === "work" ? I18n.trFor(root.pluginId, "Work") : root.timer.mode === "longBreak" ? I18n.trFor(root.pluginId, "Long break") : I18n.trFor(root.pluginId, "Short break")
+                                    text: root.timer.mode === "stopwatch" ? I18n.trFor("dankPomodoroTimerPlusPlus", "Stopwatch") : root.timer.mode === "work" ? I18n.trFor("dankPomodoroTimerPlusPlus", "Work") : root.timer.mode === "longBreak" ? I18n.trFor("dankPomodoroTimerPlusPlus", "Long break") : I18n.trFor("dankPomodoroTimerPlusPlus", "Short break")
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceVariantText
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -473,20 +473,20 @@ PluginComponent {
                             iconName: root.timer.running ? "pause" : "play_arrow"
                             iconSize: 32
                             textColor: root.getStateColor()
-                            tooltipText: root.timer.running ? I18n.trFor(root.pluginId, "Pause") : I18n.trFor(root.pluginId, "Start")
+                            tooltipText: root.timer.running ? I18n.trFor("dankPomodoroTimerPlusPlus", "Pause") : I18n.trFor("dankPomodoroTimerPlusPlus", "Start")
                             onClicked: root.toggleTimer()
                         }
                         PomodoroIconButton {
                             objectName: "recordSessionButton"
                             iconName: "save"
-                            tooltipText: I18n.trFor(root.pluginId, "Record session")
+                            tooltipText: I18n.trFor("dankPomodoroTimerPlusPlus", "Record session")
                             enabled: root.isWorkSession && !!root.pluginService && root.hasUnrecordedWork
                             onClicked: root.registerSession()
                         }
                         PomodoroIconButton {
                             objectName: "resetButton"
                             iconName: "refresh"
-                            tooltipText: I18n.trFor(root.pluginId, "Reset")
+                            tooltipText: I18n.trFor("dankPomodoroTimerPlusPlus", "Reset")
                             onClicked: root.resetTimer()
                         }
                     }
@@ -505,7 +505,7 @@ PluginComponent {
                     spacing: Theme.spacingS
                     visible: root.quickActionKeys.length > 0
                     StyledText {
-                        text: I18n.trFor(root.pluginId, "Quick Actions")
+                        text: I18n.trFor("dankPomodoroTimerPlusPlus", "Quick Actions")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                     }
@@ -532,13 +532,13 @@ PluginComponent {
                                 text: {
                                     switch (modelData) {
                                     case "work":
-                                        return I18n.trFor(root.pluginId, "Work");
+                                        return I18n.trFor("dankPomodoroTimerPlusPlus", "Work");
                                     case "shortBreak":
-                                        return I18n.trFor(root.pluginId, "Short break");
+                                        return I18n.trFor("dankPomodoroTimerPlusPlus", "Short break");
                                     case "longBreak":
-                                        return I18n.trFor(root.pluginId, "Long break");
+                                        return I18n.trFor("dankPomodoroTimerPlusPlus", "Long break");
                                     default:
-                                        return I18n.trFor(root.pluginId, "Dashboard");
+                                        return I18n.trFor("dankPomodoroTimerPlusPlus", "Dashboard");
                                     }
                                 }
                                 iconName: modelData === "work" ? "work" : modelData === "shortBreak" ? "coffee" : modelData === "longBreak" ? "weekend" : "bar_chart"
@@ -557,7 +557,7 @@ PluginComponent {
                     width: parent.width
                     spacing: Theme.spacingS
                     StyledText {
-                        text: I18n.trFor(root.pluginId, "Last 7 days")
+                        text: I18n.trFor("dankPomodoroTimerPlusPlus", "Last 7 days")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                     }
